@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ui/main.qml</file>
+        <file>ui/core/GlobalSettings.qml</file>
+        <file>ui/main/MainWindow.qml</file>
+        <file>ui/secondary/GuestWindow.qml</file>
+    </qresource>
+</RCC>
