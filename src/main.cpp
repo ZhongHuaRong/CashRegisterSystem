@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QQuickView>
 #include <QQmlEngine>
+#include <QQmlContext>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
@@ -63,9 +64,9 @@ int main(int argc, char *argv[])
 //    qmlRegisterType<CodeArea>("an.qt.CodeArea", 1, 0, "CodeArea");
     
     QQmlApplicationEngine engine;
+//    engine.load(QUrl(QStringLiteral("qrc:/ui/core/GlobalVar.qml")));
     engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml")));
-    if (engine.rootObjects().isEmpty())
+    if (engine.rootObjects().empty())
         return -1;
-    
     return app.exec();
 }

@@ -33,3 +33,5 @@ CONFIG(debug, debug|release){
 } else {
     DEFINES += RELEASE
 }
+
+DISTFILES +=

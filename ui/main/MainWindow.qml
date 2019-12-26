@@ -7,12 +7,11 @@ Rectangle {
     height:480
     visible:true
     
-    Text {
-        id: element
-        text: global_setting.remove_decimal_rule
-        font.pixelSize: 8
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
+    Loader{
+        id:page_loader
+        source: "qrc:/ui/main/LoginPage.qml"
         anchors.fill: parent
+        onLoaded: {
+        }
     }
 }

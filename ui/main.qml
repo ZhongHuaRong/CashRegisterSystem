@@ -9,7 +9,7 @@ Window {
     width:640
     height:480
     visible:true
-    visibility: Window.Maximized
+    visibility: Window.FullScreen
     screen:Qt.application.screens[0]
     
 //    property real multiplierH: window.height/480
@@ -29,14 +29,19 @@ Window {
         return numbers
 //        return (dpW(numbers)+dpH(numbers))/2;
     }
-
-    GlobalSettings{
-        id: global_setting
+    
+    MouseArea {
+        id: mouseArea
+        anchors.fill: parent
+        onDoubleClicked: {
+            Qt.quit()
+        }
     }
     
     MainWindow {
         id:main_rect
         anchors.fill: parent
+
     }
     
     GuestWindow {

@@ -4,5 +4,13 @@
         <file>ui/core/GlobalSettings.qml</file>
         <file>ui/main/MainWindow.qml</file>
         <file>ui/secondary/GuestWindow.qml</file>
+        <file>ui/main/LoginPage.qml</file>
+        <file>ui/main/MainPage.qml</file>
+        <file>image/login_logo.png</file>
+        <file>ui/core/CTextEdit.qml</file>
+        <file>ui/core/CComboBox.qml</file>
+        <file>ui/core/CButton.qml</file>
+        <file>ui/core/GlobalVar.qml</file>
+        <file>ui/core/qmldir</file>
     </qresource>
 </RCC>

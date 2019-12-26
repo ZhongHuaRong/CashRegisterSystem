@@ -5,8 +5,8 @@ Window {
     id:guest_window
     width:640
     height:480
-    visible:true
-    visibility: Window.Maximized
+    visible:Qt.application.screens.length > 1
+    visibility: Qt.application.screens.length > 1?Window.Maximized:Window.Hidden
     screen:{
         if(Qt.application.screens.length > 1)
             return Qt.application.screens[1]
