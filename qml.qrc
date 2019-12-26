@@ -12,5 +12,6 @@
         <file>ui/core/CButton.qml</file>
         <file>ui/core/GlobalVar.qml</file>
         <file>ui/core/qmldir</file>
+        <file>ui/core/BusyDialog.qml</file>
     </qresource>
 </RCC>

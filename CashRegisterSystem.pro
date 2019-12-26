@@ -1,4 +1,4 @@
-QT += quick qml core quickwidgets location network
+QT += quick qml core widgets location network
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use

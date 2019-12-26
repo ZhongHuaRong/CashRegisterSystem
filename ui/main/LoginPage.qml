@@ -69,6 +69,16 @@ Item {
         borderWidth:0
         font_family: GlobalVar.$settings.font_family
         font_pixel: GlobalVar.$settings.font_pixel
-        onClicked: element.loingClicked(account.getText(),pw.getText(),shop_name.getText())
+        onClicked: {
+            busy_dialog.open()
+            element.loingClicked(account.text,pw.text,shop_name.text)
+        }
     }
+    
+    BusyDialog {
+        id:busy_dialog
+        title : "登录"
+        text : "正在登录中..."
+    }
+    
 }

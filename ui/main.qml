@@ -10,6 +10,7 @@ Window {
     height:480
     visible:true
     visibility: Window.FullScreen
+    flags:Qt.Window | Qt.FramelessWindowHint
     screen:Qt.application.screens[0]
     
 //    property real multiplierH: window.height/480

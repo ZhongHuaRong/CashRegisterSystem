@@ -73,7 +73,6 @@ Rectangle {
             name:"pressed";
             PropertyChanges {
                 target: button;
-                color:rect.pressedBorderColor
                 width:rect.width - rect.width*0.1
                 height:rect.height - rect.height*0.1
             }

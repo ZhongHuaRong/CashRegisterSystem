@@ -8,12 +8,16 @@ Rectangle{
     border.color: "#CCCCCC"
     border.width: 1
     
-    property string text: ""
+    property string text: input.text
     property string preset_text: ""
     property color preset_text_color: "#999999"
     property int echoMode: TextInput.Normal
     property string font_family: "微软雅黑"
     property int  font_pixel: 13
+    
+    function setText(text){
+        input.text = text
+    }
     
     Text {
         verticalAlignment: Text.AlignVCenter
@@ -34,7 +38,6 @@ Rectangle{
         anchors.centerIn: parent
         horizontalAlignment:TextInput.AlignVCenter
         echoMode:rect.echoMode
-        text:rect.text
         leftPadding: 5
         rightPadding: 5
         z:12
