@@ -1,4 +1,4 @@
-import QtQuick 2.7
+import QtQuick 2.12
 import QtQuick.Controls 2.5
 
 Rectangle{
@@ -40,6 +40,7 @@ Rectangle{
         echoMode:rect.echoMode
         leftPadding: 5
         rightPadding: 5
+        focus: true
         z:12
     }    
 }

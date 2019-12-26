@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.12
 import QtQuick.Controls 2.5
 import "../core"
 
@@ -6,6 +6,30 @@ Item {
     id: element
     
     signal loingClicked(var account,var pw,var shop_name)
+    
+    function get_account() {
+        return account.text
+    }
+    
+    function get_pw() {
+        return pw.text
+    }
+    
+    function get_shop() {
+        return shop_name.currentText
+    }
+    
+    function login_failed(errstr){
+        busy_dialog.title = "登录失败"
+        busy_dialog.text = errstr
+        busy_dialog.icon = BusyDialog.Critical
+        busy_dialog.standardButtons = BusyDialog.Ok 
+        busy_dialog.open()
+    }
+    
+    Component.onCompleted: {
+        account.setText(GlobalVar.$settings.account)
+    }
     
     Image {
         id: logo_img
@@ -70,15 +94,17 @@ Item {
         font_family: GlobalVar.$settings.font_family
         font_pixel: GlobalVar.$settings.font_pixel
         onClicked: {
+            busy_dialog.title = "登录"
+            busy_dialog.text = "正在登录中..."
+            busy_dialog.icon = BusyDialog.Information
+            busy_dialog.standardButtons = BusyDialog.Cancel 
             busy_dialog.open()
-            element.loingClicked(account.text,pw.text,shop_name.text)
+            element.loingClicked(account.text,pw.text,shop_name.currentText)
         }
     }
     
     BusyDialog {
         id:busy_dialog
-        title : "登录"
-        text : "正在登录中..."
     }
     
 }

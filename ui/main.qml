@@ -1,15 +1,16 @@
 import QtQuick 2.7
-import QtQuick.Window 2.12
+import QtQuick.Window 2.10
 import "./core/"
 import "./main"
 import "./secondary"
 
 Window {
     id: main_window
-    width:640
-    height:480
+    width:Qt.application.screens[0].width
+    height:Qt.application.screens[0].height + 1
     visible:true
-    visibility: Window.FullScreen
+    x:0
+    y:0
     flags:Qt.Window | Qt.FramelessWindowHint
     screen:Qt.application.screens[0]
     
