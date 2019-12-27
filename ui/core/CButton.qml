@@ -75,6 +75,7 @@ Rectangle {
                 target: button;
                 width:rect.width - rect.width*0.1
                 height:rect.height - rect.height*0.1
+                color:rect.pressedColor
             }
         },
         State{
@@ -238,6 +239,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         color:rect.exitedColor
         border.width: 0
+        radius: rect.radius
 
         Text {
             id: text1

@@ -28,6 +28,7 @@ Settings {
     
     property string account: ""
     property string shop_name: ""
+    property string account_name: ""
     property int ads_pic_index: 0
     property string billing_ad: "请出示支付宝或微信二维码，扫码后付款"
     property string billing_finsh_ad: "感谢惠顾,请留意消费短信并查看明细"

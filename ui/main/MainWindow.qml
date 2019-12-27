@@ -18,29 +18,32 @@ Rectangle {
         main_window.account = account
         main_window.shop_name = shop_name
         if(account == "123" && pw == "123"){
-            login_result(true,"")
+            login_success("111")
         } else {
-            login_result(false,"账号错误或者密码错误")
+            login_failed("账号错误或者密码错误")
         }
 
     }
     
-    function login_result(ret,str){
-        if(ret){
-            GlobalVar.$settings.account = main_window.account
-            GlobalVar.$settings.shop_name = main_window.shop_name
-            page_loader.setSource("qrc:/ui/main/MainPage.qml")
-        } else {
-            page_loader.item.login_failed(str)
-        }
+    //需要修改,参数可能还需要多几个
+    function login_success(account_name){
+        GlobalVar.$settings.account = main_window.account
+        GlobalVar.$settings.shop_name = main_window.shop_name
+        GlobalVar.$settings.account_name = account_name
+        page_loader.setSource("qrc:/ui/main/MainPage.qml")
+    }
+    
+    function login_failed(errstr){
+        page_loader.item.login_failed(errstr)
     }
     
     Loader{
         id:page_loader
-        source: "qrc:/ui/main/LoginPage.qml"
         anchors.fill: parent
+        source: "qrc:/ui/main/LoginPage.qml"
         onLoaded: {
-            page_loader.item.loingClicked.connect(main_window.login)
+            if(page_loader.source == "qrc:/ui/main/LoginPage.qml")
+                page_loader.item.loingClicked.connect(main_window.login)
         }
     }
 }

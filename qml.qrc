@@ -13,5 +13,9 @@
         <file>ui/core/GlobalVar.qml</file>
         <file>ui/core/qmldir</file>
         <file>ui/core/BusyDialog.qml</file>
+        <file>ui/main/LeftRectangle.qml</file>
+        <file>ui/main/RightRectangle.qml</file>
+        <file>image/button_icon.png</file>
+        <file>ui/core/ClockText.qml</file>
     </qresource>
 </RCC>
