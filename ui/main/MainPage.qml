@@ -12,9 +12,8 @@ Rectangle {
         anchors.top: parent.top
         anchors.topMargin: 0
         width:main_page.width / 6 > 200?200:main_page.width / 6
-        color: "#123455"
         onItemChanged: {
-            console.debug(index)
+            right_rect.set_current_view(index,label_name)
         }
     }
     
@@ -28,5 +27,8 @@ Rectangle {
         anchors.bottomMargin: 0
         anchors.top: parent.top
         anchors.topMargin: 0
+        onItemChanged: {
+            left_rect.set_current_index(index)
+        }
     }
 }

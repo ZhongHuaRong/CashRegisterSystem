@@ -76,6 +76,18 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: pw.bottom
         anchors.topMargin: pw.anchors.topMargin
+        horizontalAlignment: Text.AlignHCenter
+        font.family:  GlobalVar.$settings.font_family
+        font.pixelSize: GlobalVar.$settings.font_pixel
+        
+        model:ListModel{
+            ListElement{
+                text:"君怡店"
+            }
+            ListElement{
+                text:"XX店"
+            }
+        }
     }
     
     CButton{

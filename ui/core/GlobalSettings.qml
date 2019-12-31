@@ -42,6 +42,6 @@ Settings {
     property bool alipay: true
     property bool wxpay: true
     property bool membership_card: true
-    property string font_family: "Arial Normal"
-    property int font_pixel: 13
+    property string font_family: "微软雅黑"
+    property int font_pixel: 12
 }

@@ -1,16 +1,20 @@
 import QtQuick 2.12
-import QtQml.Models 2.12
 import QtQuick.Controls 2.5
 import "../core"
 
 Rectangle {
     id:menubar
     
-    color: "#4a4a4a"
+    color: "#2E2F30"
     
-    signal itemChanged(int index)
+    signal itemChanged(int index,string label_name)
     
     Component.onCompleted: {
+        view.currentItem.checked = true
+    }
+    
+    function set_current_index(index){
+        view.currentIndex = index
         view.currentItem.checked = true
     }
     
@@ -89,7 +93,7 @@ Rectangle {
                 }
                 
                 Text{
-                    id:text
+                    id:txt
                     text:itemDelegate.text
                     anchors.left: icon.right
                     anchors.leftMargin: 10
@@ -106,7 +110,8 @@ Rectangle {
             }
             
             onClicked: {
-                menubar.itemChanged(index)
+                menubar.itemChanged(index,name)
+                view.currentIndex = index
             }
         }
     }

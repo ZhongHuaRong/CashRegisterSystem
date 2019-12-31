@@ -17,5 +17,15 @@
         <file>ui/main/RightRectangle.qml</file>
         <file>image/button_icon.png</file>
         <file>ui/core/ClockText.qml</file>
+        <file>ui/core/LabelButton.qml</file>
+        <file>image/close_enter.png</file>
+        <file>image/close_exit.png</file>
+        <file>ui/main/Dialog/DiscountDialog.qml</file>
+        <file>ui/main/CheckoutCounter/CheckoutCounter.qml</file>
+        <file>ui/main/OrderCenter/OrderCenter.qml</file>
+        <file>ui/main/OrderCenter/OrderSearch.qml</file>
+        <file>ui/main/OrderCenter/OrderDetails.qml</file>
+        <file>ui/core/DateIntervalSelectButton.qml</file>
+        <file>ui/core/Calendar.qml</file>
     </qresource>
 </RCC>
