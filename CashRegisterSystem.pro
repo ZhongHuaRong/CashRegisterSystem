@@ -13,7 +13,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        src/main.cpp
+        src/main.cpp \
+        src/networkmodule.cpp \
+        src/globalevent.cpp \
+        src/cxxcontainer.cpp
 
 RESOURCES += qml.qrc
 
@@ -35,3 +38,8 @@ CONFIG(debug, debug|release){
 }
 
 DISTFILES +=
+
+HEADERS += \
+    src/networkmodule.h \
+    src/globalevent.h \
+    src/cxxcontainer.h

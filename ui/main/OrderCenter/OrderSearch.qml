@@ -4,6 +4,15 @@ import "../../core"
 Item {
     id: element
     
+    signal searchFromDate(var firstDate,var secondDate,var flag,int count)
+    signal searchFromID(var id)
+    
+    function set_model_data(list){
+        console.debug(list.length)
+        console.debug(list[0])
+        console.debug(list[1]['状态'])
+    }
+    
     Rectangle{
         id: rectangle
         border.color: "#CCCCCC"
@@ -69,6 +78,8 @@ Item {
                 font_pixel: GlobalVar.$settings.font_pixel
                 height: datebtn.height
                 width: 70
+                onClicked: 
+                    element.searchFromDate(datebtn.firstDate,datebtn.secondDate,states.currentText,30)
             }
         }
         
@@ -89,32 +100,23 @@ Item {
                 else
                     return rectangle.width - row.width - 20
             }
+            onAccepted: element.searchFromID(searchIDText.text)
         }
         
     }
     
-
-    
-    Column {
-        id:column
-        anchors.fill: parent
+    OrderListView{
+        anchors.top: rectangle.bottom
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
         anchors.leftMargin: 10
         anchors.rightMargin: 10
-        anchors.topMargin: 10
+        anchors.topMargin: 5
         anchors.bottomMargin: 10
-        spacing: 10
         
-
-        
-        Rectangle{
-            color: "#000000"
+        model:ListModel{
+            id:listModel
         }
     }
 }
-
-
-
-/*##^## Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
- ##^##*/

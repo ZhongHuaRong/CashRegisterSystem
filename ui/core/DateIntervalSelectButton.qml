@@ -9,6 +9,11 @@ Rectangle {
     border.color: "#CCCCCC"
 //    clip: true
     
+    property var curDate: new Date()
+    property bool firstFlag: true
+    property var firstDate: curDate
+    property var secondDate: curDate
+    
     Row {
         id: row
         anchors.fill: parent
@@ -20,7 +25,7 @@ Rectangle {
         
         Button{
             id:firstBtn
-            text:new Date().toLocaleDateString(GlobalVar.$locale,"yyyy-MM-dd")
+            text:curDate.toLocaleDateString(GlobalVar.$locale,"yyyy-MM-dd")
             anchors.verticalCenter: parent.verticalCenter
             width:(row.width - spaceText.width - 8) / 2
             height:row.height - 10
@@ -33,7 +38,14 @@ Rectangle {
                         return "#00000000"
                 }
             }
-            onClicked: popup.open()
+            onClicked: {
+                firstFlag = true
+                calendar.maximumDate = secondDate
+                calendar.minimumDate = Date.fromLocaleString(GlobalVar.$locale, 
+                                                             "1970-01-01", "yyyy-MM-dd")
+                calendar.selectedDate = firstDate
+                popup.open()
+            }
         }
         
         Text{
@@ -46,7 +58,7 @@ Rectangle {
         
         Button{
             id:secondBtn
-            text:firstBtn.text
+            text:curDate.toLocaleDateString(GlobalVar.$locale,"yyyy-MM-dd")
             anchors.verticalCenter: parent.verticalCenter
             width:firstBtn.width
             height:row.height - 10
@@ -59,16 +71,43 @@ Rectangle {
                         return "#00000000"
                 }
             }
-            onClicked: popup.open()
+            onClicked: {
+                firstFlag = false
+                calendar.maximumDate = curDate
+                calendar.minimumDate = firstDate
+                calendar.selectedDate = secondDate
+                popup.open()
+            }
         }
     }
     
     Popup{
         id:popup
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
-
+        y:row.y + row.height
+        
+        leftInset: 0
+        leftPadding: 0
+        topInset: 0
+        topPadding: 0
+        bottomInset: 0
+        bottomPadding: 0
+        rightPadding:0
+        rightInset: 0
         contentItem: Calendar {
             id: calendar
+            maximumDate: curDate.toLocaleDateString(GlobalVar.$locale,"yyyy-MM-dd")
+            onClicked: {
+                popup.close()
+                if(firstFlag){
+                    firstDate = date
+                    firstBtn.text = date.toLocaleDateString(GlobalVar.$locale,"yyyy-MM-dd")
+                }
+                else {
+                    secondDate = date
+                    secondBtn.text = date.toLocaleDateString(GlobalVar.$locale,"yyyy-MM-dd")
+                }
+            }
         }
 
         background: Rectangle {

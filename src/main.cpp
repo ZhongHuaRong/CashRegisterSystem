@@ -7,6 +7,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
+#include "globalevent.h"
+#include "cxxcontainer.h"
+
 #ifdef RELEASE 
 #include <QDateTime>
 void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString & str)
@@ -59,11 +62,11 @@ int main(int argc, char *argv[])
     QSettings::setDefaultFormat(QSettings::IniFormat);
     
     //注册，使C++类在qml中使用
-//    qRegisterMetaType<QList<QList<QVariant>>>("QList<QList<QVariant>>");
-//    qmlRegisterType<CodeArea>("an.qt.CodeArea", 1, 0, "CodeArea");
+    qRegisterMetaType<QVector<QMap<QString,QString>>>("QVector<QMap<QString,QString>>");
+    qmlRegisterType<GlobalEvent>("an.qt.GlobalEvent", 1, 0, "GlobalEvent");
+    qmlRegisterType<CXXContainer>("an.qt.CXXContainer", 1, 0, "CXXContainer");
     
     QQmlApplicationEngine engine;
-//    engine.load(QUrl(QStringLiteral("qrc:/ui/core/GlobalVar.qml")));
     engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml")));
     if (engine.rootObjects().empty())
         return -1;

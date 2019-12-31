@@ -8,6 +8,7 @@ Rectangle{
     border.color: "#CCCCCC"
     border.width: 1
     
+    signal accepted()
     property string text: input.text
     property string preset_text: ""
     property color preset_text_color: "#999999"
@@ -41,6 +42,8 @@ Rectangle{
         leftPadding: 5
         rightPadding: 5
         focus: true
+        selectByMouse:true
+        onAccepted: rect.accepted()
         z:12
     }    
 }

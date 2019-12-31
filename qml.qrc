@@ -27,5 +27,6 @@
         <file>ui/main/OrderCenter/OrderDetails.qml</file>
         <file>ui/core/DateIntervalSelectButton.qml</file>
         <file>ui/core/Calendar.qml</file>
+        <file>ui/main/OrderCenter/OrderListView.qml</file>
     </qresource>
 </RCC>
