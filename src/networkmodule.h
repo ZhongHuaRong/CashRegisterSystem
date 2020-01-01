@@ -15,10 +15,13 @@ public:
     
     ~NetworkModule();
 signals:
-    void return_order_data(QList<QVariant> data);
+    void return_order_data(const QList<QVariant> &data);
+    void return_order_detail(const QVariant &data);
 public slots:
     void search_order_from_id(const QString& id);
-    void search_order_from_date(const QDate& first,const QDate& second,const QString& flag,const int& count); 
+    void search_order_from_date(const QDate& first,const QDate& second,
+                                const QString& flag,const int& count,const int& page); 
+    void search_order_detail(const QString& id,bool isRefund);
 private:
     QThread * thread;
 };

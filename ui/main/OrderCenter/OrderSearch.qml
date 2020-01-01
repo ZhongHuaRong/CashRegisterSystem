@@ -4,13 +4,12 @@ import "../../core"
 Item {
     id: element
     
-    signal searchFromDate(var firstDate,var secondDate,var flag,int count)
+    signal searchFromDate(var firstDate,var secondDate,var flag,int count,int pageNum)
     signal searchFromID(var id)
+    signal searchOrderDetail(var id,var isRefund)
     
     function set_model_data(list){
-        console.debug(list.length)
-        console.debug(list[0])
-        console.debug(list[1]['状态'])
+        tableView.setData(list[0]["totalOrder"],list[0]["totalPage"],list[0]["currentPage"],list)
     }
     
     Rectangle{
@@ -79,7 +78,9 @@ Item {
                 height: datebtn.height
                 width: 70
                 onClicked: 
-                    element.searchFromDate(datebtn.firstDate,datebtn.secondDate,states.currentText,30)
+                    element.searchFromDate(datebtn.firstDate,datebtn.secondDate,
+                                           states.currentText,
+                                           30,1)
             }
         }
         
@@ -105,7 +106,8 @@ Item {
         
     }
     
-    OrderListView{
+    OrderTableView{
+        id:tableView
         anchors.top: rectangle.bottom
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -114,9 +116,13 @@ Item {
         anchors.rightMargin: 10
         anchors.topMargin: 5
         anchors.bottomMargin: 10
-        
-        model:ListModel{
-            id:listModel
-        }
+        font_family: GlobalVar.$settings.font_family
+        font_pixel: GlobalVar.$settings.font_pixel
+        onGotoPage: 
+            element.searchFromDate(datebtn.firstDate,datebtn.secondDate,
+                                   states.currentText,
+                                   30,page)
+        onOrderDetail: element.searchOrderDetail(id,false)
+        onOrderRefund: element.refundOrder(id,true)
     }
 }
