@@ -31,8 +31,6 @@ Rectangle {
         anchors.topMargin: 12
         unClickedColor:"#979797"
         text_color: "#FFFFFF"
-        font_family: GlobalVar.$settings.font_family
-        font_pixel: GlobalVar.$settings.font_pixel
     }
     
     ListModel{
@@ -92,7 +90,7 @@ Rectangle {
                     anchors.verticalCenter: parent.verticalCenter
                 }
                 
-                Text{
+                CText{
                     id:txt
                     text:itemDelegate.text
                     anchors.left: icon.right
@@ -104,8 +102,6 @@ Rectangle {
                         else 
                             return "#878787"
                     }
-                    font.family: GlobalVar.$settings.font_family
-                    font.pixelSize: GlobalVar.$settings.font_pixel
                 }
             }
             

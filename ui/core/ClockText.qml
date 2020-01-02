@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import "./"
 
-Text {
+CText {
     id:clock_text
     
     Timer {

@@ -1,11 +1,14 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
+import "./"
 
 TabButton {
     id:btn
     checkable: true
     padding:0
     clip: true
+    font.family: GlobalVar.$settings.font_family
+    font.pixelSize: GlobalVar.$settings.font_pixel
     
     signal close(var item)
     

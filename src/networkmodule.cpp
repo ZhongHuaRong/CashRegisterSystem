@@ -74,7 +74,8 @@ void NetworkModule::search_order_detail(const QString &id,bool isRefund)
 {
     qDebug() << id;
     QMap<QString,QVariant> item;
-    item["state"] = "已付款";
+    item["id"] = id;
+    item["state"] = "已退款";
     item["isRefund"] = isRefund;
     item["cashier"] = "1000000000001";
     item["category"] = "2";
@@ -85,7 +86,10 @@ void NetworkModule::search_order_detail(const QString &id,bool isRefund)
     item["actualAmount"] = "100.9";
     item["giveChange"] = "73.9";
     item["paymentMethod"] = "会员余额";
-    item["time"] = "2019-11-11";
+    item["payTime"] = "2019-11-11";
+    item["user"] = "1001";
+    item["refund"] = "30.8";
+    item["refundTime"] = "2018-11-11";
     item["memberID"] = "`123456789";
     item["integral"] = "1111";
     item["balance"] = "100.00";

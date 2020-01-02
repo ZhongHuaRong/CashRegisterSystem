@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "./"
 
 Rectangle {
     id: rect
@@ -19,8 +20,8 @@ Rectangle {
     property var buttonTypeIsText: true
     property url imageUrl: ""
     property color text_color: "#000000"
-    property int font_pixel: 20
-    property string font_family: "微软雅黑"
+    property int font_pixel: GlobalVar.$settings.font_pixel
+    property string font_family: GlobalVar.$settings.font_family
 
     //让子组件button暴露在接口
     property var buttonObject: button
@@ -145,7 +146,8 @@ Rectangle {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        hoverEnabled: true
+        hoverEnabled: false
+        preventStealing:true
 
         onEntered: {
             if(!rect.canClicked){
@@ -238,7 +240,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
         color:rect.exitedColor
-        border.width: 0
+        border.width: borderWidth
         radius: rect.radius
 
         Text {

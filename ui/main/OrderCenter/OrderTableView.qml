@@ -6,9 +6,7 @@ import "../View/"
 Rectangle{
     id: rectangle
     
-    property int font_pixel: 16
-    property string font_family: "微软雅黑"
-    property var columnWidth: rectangle.width / 7.0
+    property var columnWidth: (rectangle.width - 180)/ 6.0
     
     signal gotoPage(var page)
     signal orderDetail(var id)
@@ -26,7 +24,7 @@ Rectangle{
                                  "total":list[i]["order_total"],
                                  "glod":list[i]["gold"],
                                  "time":list[i]["time"],
-                                 "state":list[i]["状态"],
+                                 "state":list[i]["state"],
                                  "button":list[i]["state"] === "已退款"
                              })
         }
@@ -89,7 +87,7 @@ Rectangle{
         TableViewColumn {
             title: "操作"
             role: "button"
-            width: columnWidth
+            width: 180
         }
     
         itemDelegate: ItemDelegate{
@@ -114,7 +112,5 @@ Rectangle{
         anchors.right: parent.right
         anchors.rightMargin: 0
         onGotoPage: rectangle.gotoPage(page)
-        font_pixel:rectangle.font_pixel
-        font_family:rectangle.font_family
     }
 }

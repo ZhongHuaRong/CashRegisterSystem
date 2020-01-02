@@ -23,8 +23,6 @@ Rectangle {
             }
         }
         var i = labelButtonCom.createObject(bar,{
-                                           "font.family":GlobalVar.$settings.font_family,
-                                           "font.pixelSize":GlobalVar.$settings.font_pixel,
                                            "text":labelName,
                                            "width":mainbtn.width,
                                            "height":mainbtn.height
@@ -39,6 +37,7 @@ Rectangle {
     function add_view(name){
         switch(name){
         case "订单中心":
+            console.debug(orderCom.errorString())
             var page = orderCom.createObject(swipeView)
             page.titleChanged.connect(rect.set_current_tab_text)
             break
@@ -116,8 +115,6 @@ Rectangle {
                 enteredColor: "#5ECDB9"
                 pressedColor:"#5ECDB9"
                 text_color: "#FFFFFF"
-                font_family: GlobalVar.$settings.font_family
-                font_pixel: GlobalVar.$settings.font_pixel
                 onClicked: Qt.quit()
             }  
             
@@ -129,17 +126,13 @@ Rectangle {
                 enteredColor: "#5ECDB9"
                 pressedColor:"#5ECDB9"
                 text_color: "#FFFFFF"
-                font_family: GlobalVar.$settings.font_family
-                font_pixel: GlobalVar.$settings.font_pixel
                 onClicked: rect.connect_electronic_scale()
             }
             
-            Text {
+            CText {
                 id:name
                 text:GlobalVar.$settings.account_name
                 anchors.verticalCenter: parent.verticalCenter
-                font.family:  GlobalVar.$settings.font_family
-                font.pixelSize: GlobalVar.$settings.font_pixel
                 color: "#666666"
             }
             
@@ -147,8 +140,6 @@ Rectangle {
                 id:clock
                 text:GlobalVar.$settings.account_name
                 anchors.verticalCenter: parent.verticalCenter
-                font.family:  GlobalVar.$settings.font_family
-                font.pixelSize: GlobalVar.$settings.font_pixel
                 color: "#666666"
             }
         }
@@ -197,8 +188,6 @@ Rectangle {
                 width: 120
                 height:30
                 text: qsTr("收银台")
-                font.family:  GlobalVar.$settings.font_family
-                font.pixelSize: GlobalVar.$settings.font_pixel
                 show_icon: false
             }
         }

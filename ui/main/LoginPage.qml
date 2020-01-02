@@ -47,13 +47,11 @@ Item {
     CTextEdit {
         id:account
         width:logo_img.width
-        height:dpH(30)
+        height:30
         anchors.top: logo_img.bottom
         anchors.topMargin: pw.anchors.topMargin * 2
         anchors.horizontalCenter: parent.horizontalCenter
         preset_text: "门店收银员账号"
-        font_family: GlobalVar.$settings.font_family
-        font_pixel: GlobalVar.$settings.font_pixel
     }
     
     CTextEdit{
@@ -61,12 +59,10 @@ Item {
         width:logo_img.width
         height:account.height
         anchors.top: account.bottom
-        anchors.topMargin: dpH(10)
+        anchors.topMargin: 10
         echoMode:TextInput.Password
         anchors.horizontalCenter: parent.horizontalCenter
         preset_text: "登陆密码"
-        font_family: GlobalVar.$settings.font_family
-        font_pixel: GlobalVar.$settings.font_pixel
     }
     
     CComboBox {
@@ -77,8 +73,6 @@ Item {
         anchors.top: pw.bottom
         anchors.topMargin: pw.anchors.topMargin
         horizontalAlignment: Text.AlignHCenter
-        font.family:  GlobalVar.$settings.font_family
-        font.pixelSize: GlobalVar.$settings.font_pixel
         
         model:ListModel{
             ListElement{
@@ -103,8 +97,6 @@ Item {
         unClickedColor: "#A3BF00"
         enteredColor: "#A3BF00"
         borderWidth:0
-        font_family: GlobalVar.$settings.font_family
-        font_pixel: GlobalVar.$settings.font_pixel
         onClicked: {
             busy_dialog.title = "登录"
             busy_dialog.text = "正在登录中..."

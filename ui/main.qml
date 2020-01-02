@@ -8,8 +8,8 @@ Window {
     id: main_window
 //    width:Qt.application.screens[0].width
 //    height:Qt.application.screens[0].height + 1
-    width:640
-    height:480
+    width:1280
+    height:960
     visible:true
     x:0
     y:0

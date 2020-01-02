@@ -1,13 +1,12 @@
-import QtQuick 2.12
+import QtQuick 2.0
 import QtQuick.Controls 1.4
-import "../../core"
 
-TableView {
+ScrollView {
     id:view
     horizontalScrollBarPolicy:Qt.ScrollBarAlwaysOff
     verticalScrollBarPolicy:Qt.ScrollBarAlwaysOff  
     
-    property real headerHeight: 25
+    property real headerHeight: 0
     property real mouseY: 0
     
     MouseArea{
@@ -23,6 +22,8 @@ TableView {
         property real maxY: view.flickableItem.contentHeight - view.height - view.headerHeight
         
         onPositionChanged: {
+            if(view.flickableItem.contentHeight < view.height)
+                return;
             view.flickableItem.contentY -= (mouse.y - view.mouseY);
             view.mouseY = mouse.y
             if(view.flickableItem.contentY > maxY){
@@ -31,36 +32,5 @@ TableView {
                 view.flickableItem.contentY = minY
             } 
         }
-    }
-    
-    model:ListModel{
-        id:listModel
-    }
-    
-    headerVisible :true
-    headerDelegate:Component{
-
-        Rectangle{
-            color:"#F2F2F2"
-            height:headerHeight
-            border.width: 0
-            clip:true
-
-            CText {
-                anchors.fill:parent
-                anchors.leftMargin: 5
-                color: "#445266"
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment:Text.AlignHCenter
-                text: styleData.value
-            }
-        }
-    }   
-    
-    rowDelegate:Rectangle{
-        color:"#ffffff"
-        height:40
-        border.width: 1
-        border.color: "#CCCCCC"
     }
 }

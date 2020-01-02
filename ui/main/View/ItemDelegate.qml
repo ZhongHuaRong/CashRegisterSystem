@@ -5,6 +5,7 @@ import "../../core"
 
 Item{
     id:loader
+    clip: true
     
     property bool isText: true
     property string text: ""
@@ -20,10 +21,12 @@ Item{
         id: element
         anchors.fill: parent
         visible: !isText
+        spacing: 5
         
         CButton{
             id:firstBtn
             height: parent.height - 10
+            width:70
             text: firstBtnText
             text_color: "#FFFFFF"
             pressedColor:"#169BD5"
@@ -31,17 +34,21 @@ Item{
             unClickedColor:"#979797"
             enteredColor: "#169BD5"
             borderWidth:0
-            font_family: GlobalVar.$settings.font_family
-            font_pixel: GlobalVar.$settings.font_pixel
             onClicked: firstBtnClick()
             visible: firstBtnVisible
+            Layout.alignment:Qt.AlignVCenter | Qt.AlignRight
+        }
+        
+        Item{
             Layout.alignment:Qt.AlignVCenter | Qt.AlignHCenter
-            Layout.fillWidth:true
+            width:1
+            visible: firstBtnVisible
         }
         
         CButton{
             id:secondBtn
             height: parent.height - 10
+            width:70
             text: secondBtnText
             text_color: "#FFFFFF"
             pressedColor:"#169BD5"
@@ -49,26 +56,25 @@ Item{
             unClickedColor:"#979797"
             enteredColor: "#169BD5"
             borderWidth:0
-            font_family: GlobalVar.$settings.font_family
-            font_pixel: GlobalVar.$settings.font_pixel
             visible: secondBtnVisible
             onClicked: secondBtnClick()
-            Layout.alignment:Qt.AlignVCenter | Qt.AlignHCenter
-            Layout.fillWidth:true
+            Layout.alignment:{
+                if(firstBtnVisible)
+                    Qt.AlignVCenter | Qt.AlignLeft
+                else
+                    Qt.AlignVCenter | Qt.AlignHCenter
+            }
         }
         
     }
     
-    Text {
+    CText {
         anchors.fill: parent
         text:loader.text
         visible: isText
         color: "#445266"
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment:Text.AlignHCenter
-        elide :Text.ElideRight
-        font.family: GlobalVar.$settings.font_family
-        font.pixelSize: GlobalVar.$settings.font_pixel
     }
     
 }

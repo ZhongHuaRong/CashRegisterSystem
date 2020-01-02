@@ -18,12 +18,14 @@ SwipeView {
     }
     
     function change2Detail(data){
-        
+        details.setDetailLabel(data)
         orderCenter.currentIndex = 1
+        titleChanged("订单详情")
     }
     
-    function change2Search(data){
+    function change2Search(){
         orderCenter.setCurrentIndex(0)
+        titleChanged("订单中心")
         
     }
     
@@ -42,5 +44,11 @@ SwipeView {
     
     OrderDetails{
         id:details
+        onClose: {
+            change2Search()
+        }
+        onPrintReceipt: {
+            console.debug("print")
+        }
     }
 }

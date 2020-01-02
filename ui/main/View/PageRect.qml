@@ -7,8 +7,6 @@ Rectangle{
     border.color: "#CCCCCC"
     border.width: 1
     
-    property int font_pixel: 16
-    property string font_family: "微软雅黑"
     property string totalNumText: "0"
     property string pageNumText: "0"
     property string curPageText: "1"
@@ -26,61 +24,44 @@ Rectangle{
         clip: true
         spacing: 7
         
-        Text{
+        CText{
             text:"订单总数:"
             anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: font_pixel
-            font.family: font_family
         }
         
-        Text {
+        CText {
             id:totalNum
             text:totalNumText
             anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: font_pixel
-            font.family: font_family
         }
         
-        Text{
+        CText{
             text:"|"
             anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: font_pixel
-            font.family: font_family
         }
         
-        Text{
+        CText{
             text:"总页数"
             anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: font_pixel
-            font.family: font_family
         }
-        Text {
+        CText {
             id:pageNum
             text:pageNumText
             anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: font_pixel
-            font.family: font_family
         }
-        
-        Text{
+        CText{
             text:"|"
             anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: font_pixel
-            font.family: font_family
         }
         
-        Text{
+        CText{
             text:"当前页数"
             anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: font_pixel
-            font.family: font_family
         }
-        Text {
+        CText {
             id:curPage
             text:curPageText
             anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: font_pixel
-            font.family: font_family
         }
     }
     
@@ -104,8 +85,6 @@ Rectangle{
             unClickedColor:"#979797"
             enteredColor: "#169BD5"
             borderWidth:0
-            font_family: GlobalVar.$settings.font_family
-            font_pixel: GlobalVar.$settings.font_pixel
             height: 30
             width: 100
             onClicked: gotoPage(Number(curPageText) - 1)
@@ -122,8 +101,6 @@ Rectangle{
             unClickedColor:"#979797"
             enteredColor: "#169BD5"
             borderWidth:0
-            font_family: GlobalVar.$settings.font_family
-            font_pixel: GlobalVar.$settings.font_pixel
             height: provious.height
             width: 100
             onClicked: gotoPage(Number(curPageText) + 1)

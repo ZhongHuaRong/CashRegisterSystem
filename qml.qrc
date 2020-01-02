@@ -31,5 +31,11 @@
         <file>ui/main/View/CTableView.qml</file>
         <file>ui/main/View/ItemDelegate.qml</file>
         <file>ui/main/View/PageRect.qml</file>
+        <file>ui/main/OrderCenter/OrderDetailLabelView.qml</file>
+        <file>ui/main/OrderCenter/OrderDetailListView.qml</file>
+        <file>ui/main/OrderCenter/OrderDetailRefundView.qml</file>
+        <file>ui/core/Calculator.qml</file>
+        <file>ui/core/CScrollView.qml</file>
+        <file>ui/core/CText.qml</file>
     </qresource>
 </RCC>

@@ -8,7 +8,7 @@
 #include <QQmlApplicationEngine>
 
 #include "globalevent.h"
-#include "cxxcontainer.h"
+#include "dottedline.h"
 
 #ifdef RELEASE 
 #include <QDateTime>
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
     //注册，使C++类在qml中使用
     qRegisterMetaType<QVector<QMap<QString,QString>>>("QVector<QMap<QString,QString>>");
     qmlRegisterType<GlobalEvent>("an.qt.GlobalEvent", 1, 0, "GlobalEvent");
-    qmlRegisterType<CXXContainer>("an.qt.CXXContainer", 1, 0, "CXXContainer");
+    qmlRegisterType<DottedLine>("an.qt.DottedLine", 1, 0, "DottedLine");
     
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml")));

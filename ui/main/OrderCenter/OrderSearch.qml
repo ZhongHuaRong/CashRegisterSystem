@@ -42,8 +42,6 @@ Item {
             
             CComboBox{
                 id:states
-                font.family:  GlobalVar.$settings.font_family
-                font.pixelSize: GlobalVar.$settings.font_pixel
                 implicitWidth: 90
                 height: datebtn.height
                 anchors.verticalCenter: parent.verticalCenter
@@ -73,8 +71,6 @@ Item {
                 unClickedColor: "#169BD5"
                 enteredColor: "#169BD5"
                 borderWidth:0
-                font_family: GlobalVar.$settings.font_family
-                font_pixel: GlobalVar.$settings.font_pixel
                 height: datebtn.height
                 width: 70
                 onClicked: 
@@ -93,8 +89,6 @@ Item {
             anchors.topMargin: 5
             radius: 100
             preset_text:"搜索 订单号"
-            font_family: GlobalVar.$settings.font_family
-            font_pixel: GlobalVar.$settings.font_pixel
             width:{
                 if(rectangle.width - row.width > 320)
                     return 300
@@ -116,13 +110,11 @@ Item {
         anchors.rightMargin: 10
         anchors.topMargin: 5
         anchors.bottomMargin: 10
-        font_family: GlobalVar.$settings.font_family
-        font_pixel: GlobalVar.$settings.font_pixel
         onGotoPage: 
             element.searchFromDate(datebtn.firstDate,datebtn.secondDate,
                                    states.currentText,
                                    30,page)
         onOrderDetail: element.searchOrderDetail(id,false)
-        onOrderRefund: element.refundOrder(id,true)
+        onOrderRefund: element.searchOrderDetail(id,true)
     }
 }

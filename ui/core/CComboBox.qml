@@ -1,10 +1,11 @@
 import QtQuick 2.6
 import QtQuick.Controls 2.5
+import "./"
 
 ComboBox {
     id: comboBox
-    font.pixelSize: 16
-    font.family: "微软雅黑"
+    font.family: GlobalVar.$settings.font_family
+    font.pixelSize: GlobalVar.$settings.font_pixel
     
     property var horizontalAlignment: Text.AlignLeft
 

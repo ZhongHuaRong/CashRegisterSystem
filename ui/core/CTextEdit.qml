@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
+import "./"
 
 Rectangle{
     id:rect 
@@ -13,8 +14,8 @@ Rectangle{
     property string preset_text: ""
     property color preset_text_color: "#999999"
     property int echoMode: TextInput.Normal
-    property string font_family: "微软雅黑"
-    property int  font_pixel: 13
+    property string font_family: GlobalVar.$settings.font_family
+    property int  font_pixel: GlobalVar.$settings.font_pixel
     
     function setText(text){
         input.text = text
