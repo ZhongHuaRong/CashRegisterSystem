@@ -26,11 +26,18 @@ signals:
                                 const QString& flag,const int& count,const int& page);
     void search_order_detail(const QString& id,bool isRefund);
     
+    void search_member_from_level(const QString& flag,const int& count,const int& page);
+    void search_member_from_id(const QString& id);
+    
     void return_order_data(const QList<QVariant>& data);
     void return_order_detail(const QVariant& data);
+    
+    void return_member_data(const QList<QVariant>& data);
 public slots:
     void receive_order_data(const QList<QVariant>& data);
     void receive_order_detail(const QVariant& data);
+    
+    void receive_member_data(const QList<QVariant>& data);
 private:
     NetworkModule network;
 };

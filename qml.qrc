@@ -37,5 +37,11 @@
         <file>ui/core/Calculator.qml</file>
         <file>ui/core/CScrollView.qml</file>
         <file>ui/core/CText.qml</file>
+        <file>ui/core/CalculatorButton.qml</file>
+        <file>ui/main/MemberCenter/MemberCenter.qml</file>
+        <file>ui/main/MemberCenter/MemberCenterTableView.qml</file>
+        <file>ui/main/MemberCenter/MemberDetails.qml</file>
+        <file>ui/main/MemberCenter/MemberRecordingTableView.qml</file>
+        <file>ui/main/MemberCenter/MemberSearch.qml</file>
     </qresource>
 </RCC>

@@ -3,6 +3,7 @@ import QtQuick.Controls 2.5
 import "../core"
 import "./CheckoutCounter"
 import "./OrderCenter"
+import "./MemberCenter"
 
 Rectangle {
     id:rect
@@ -12,6 +13,7 @@ Rectangle {
     property var labelButtonCom: Qt.createComponent("qrc:/ui/core/LabelButton.qml")
     property var checkoutCom: Qt.createComponent("qrc:/ui/main/CheckoutCounter/CheckoutCounter.qml")
     property var orderCom: Qt.createComponent("qrc:/ui/main/OrderCenter/OrderCenter.qml")
+    property var memberCom: Qt.createComponent("qrc:/ui/main/MemberCenter/MemberCenter.qml")
     signal connect_electronic_scale()
     signal itemChanged(int index)
     
@@ -40,8 +42,15 @@ Rectangle {
             console.debug(orderCom.errorString())
             var page = orderCom.createObject(swipeView)
             page.titleChanged.connect(rect.set_current_tab_text)
+            GlobalVar.$event.return_order_data.connect(page.setData)
+            GlobalVar.$event.return_order_detail.connect(page.change2Detail)
             break
         case "会员中心":
+            console.debug(memberCom.errorString())
+            var page = memberCom.createObject(swipeView)
+            page.titleChanged.connect(rect.set_current_tab_text)
+            GlobalVar.$event.return_member_data.connect(page.setData)
+            break
         case "交接班":
         case "设置":
         default:
@@ -61,9 +70,11 @@ Rectangle {
         }
         if(i == bar.count)
             return
-        list_erase(labelList,i)
         bar.removeItem(item)
-        delete swipeView.takeItem(i)
+        var a = swipeView.takeItem(i)
+        removeConnect(i,a)
+        a.destroy(0)
+        list_erase(labelList,i)
     }
     
     function list_erase(list,index){
@@ -85,6 +96,25 @@ Rectangle {
             _list.pop()
         }
         
+    }
+    
+    function removeConnect(index,item){
+        switch(labelList[index]){
+        case 0:
+            break
+        case 1:
+            GlobalVar.$event.return_order_data.disconnect(item.setData)
+            GlobalVar.$event.return_order_detail.disconnect(item.change2Detail)
+            break;
+        case 2:
+            GlobalVar.$event.return_member_data.disconnect(item.setData)
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        }
+
     }
     
     function set_current_tab_text(str){

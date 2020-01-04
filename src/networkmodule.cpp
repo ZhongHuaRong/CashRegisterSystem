@@ -20,12 +20,12 @@ void NetworkModule::search_order_from_id(const QString &id)
     qDebug() << id;
     QList<QVariant> data;
     QMap<QString,QVariant> item;
-    item["订单号"] = id;
-    item["商品数量"] = "2";
-    item["订单总额"] = "1.00";
-    item["实收金额"] = "1.00";
-    item["支付时间"] = "2019-11-13";
-    item["状态"] = "已付款";
+    item["order_num"] = id;
+    item["count"] = "2";
+    item["order_total"] = "1.00";
+    item["gold"] = "1.00";
+    item["time"] = "2019-11-13";
+    item["state"] = "已付款";
     
     QMap<QString,QVariant> msg;
     msg["currentPage"] = 1;
@@ -75,16 +75,16 @@ void NetworkModule::search_order_detail(const QString &id,bool isRefund)
     qDebug() << id;
     QMap<QString,QVariant> item;
     item["id"] = id;
-    item["state"] = "已退款";
+    item["state"] = "已付款";
     item["isRefund"] = isRefund;
     item["cashier"] = "1000000000001";
     item["category"] = "2";
     item["totalAmount"] = "28.0";
     item["reduceAmount"] = "1.0";
-    item["discountedGold"] = "27.0";
-    item["amountsPayable"] = "27.0";
-    item["actualAmount"] = "100.9";
-    item["giveChange"] = "73.9";
+    item["discountedGold"] = "999.0";
+    item["amountsPayable"] = "999.0";
+    item["actualAmount"] = "1000.9";
+    item["giveChange"] = "1.9";
     item["paymentMethod"] = "会员余额";
     item["payTime"] = "2019-11-11";
     item["user"] = "1001";
@@ -98,6 +98,7 @@ void NetworkModule::search_order_detail(const QString &id,bool isRefund)
     QMap<QString,QVariant> map;
     map["name"] = "新疆红枣";
     map["price"] = "22";
+    map["dis"] = 0;
     map["count"] = "1";
     map["unit"] = "包";
     list.append(map);
@@ -110,4 +111,62 @@ void NetworkModule::search_order_detail(const QString &id,bool isRefund)
     list.append(map);
     item["list"] = list;
     emit return_order_detail(item);
+}
+
+void NetworkModule::search_member_from_id(const QString &id)
+{
+    qDebug() << id;
+    QList<QVariant> data;
+    QMap<QString,QVariant> item;
+    item["num"] = id;
+    item["integral"] = "2";
+    item["balance"] = "1.00";
+    item["count"] = "1.00";
+    item["registrationTime"] = "2019-11-13";
+    item["expireDate"] = "长期";
+    item["level"] = "VIP会员";
+    item["state"] = "开启";
+    
+    QMap<QString,QVariant> msg;
+    msg["currentPage"] = 1;
+    msg["totalPage"] = 1;
+    msg["totalOrder"] = 1;
+    data.push_back(msg);
+    data.push_back(item);
+    
+    emit return_member_data(data);
+}
+
+void NetworkModule::search_member_from_level(const QString &flag, const int &count, const int &page)
+{
+    qDebug() << flag;
+    qDebug() << count;
+    qDebug() << page;
+    QList<QVariant> data;
+    QMap<QString,QVariant> item;
+    item["num"] = "12345678900";
+    item["integral"] = "2";
+    item["balance"] = "1.00";
+    item["count"] = "1.00";
+    item["registrationTime"] = "2019-11-13";
+    item["expireDate"] = "长期";
+    item["level"] = "VIP会员";
+    item["state"] = "开启";
+    item["name"] = "ZM";
+    item["remark"] = "一个人";
+    
+    QMap<QString,QVariant> msg;
+    msg["currentPage"] = page;
+    msg["totalPage"] = 20;
+    msg["totalOrder"] = 20 * count;
+    data.push_back(msg);
+    for(auto i = 0;i < count;i++){
+        data.push_back(item);
+        if(item["state"] == "开启")
+            item["state"] = "冻结";
+        else  
+            item["state"] = "开启";
+    }
+    
+    emit return_member_data(data);
 }

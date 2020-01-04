@@ -8,25 +8,10 @@ Rectangle {
     color: "#FFFFFF"
     
     signal close()
-    signal refund()
+    signal refund(var num)
     signal printReceipt()
     
     function setDetailLabel(data){
-        //        QList<QVariant> list;
-        //        QMap<QString,QVariant> map;
-        //        map["name"] = "新疆红枣";
-        //        map["price"] = "22";
-        //        map["count"] = "1";
-        //        map["unit"] = "包";
-        //        list.append(map);
-        //        map.clear();
-        //        map["name"] = "椰青";
-        //        map["price"] = "11.00";
-        //        map["dis"] = "1.00";
-        //        map["count"] = "1";
-        //        map["unit"] = "件";
-        //        list.append(map);
-        //        item["list"] = list;
         labelView.orderID = data["id"]
         labelView.cashier = data["cashier"]
         labelView.payState = data["state"]
@@ -45,9 +30,24 @@ Rectangle {
         labelView.memberID = data["memberID"]
         labelView.integral = data["integral"]
         labelView.balance = data["balance"]
+        listView.setData(data["list"])
+        if(data["isRefund"])
+            openRefund()
+        else
+            closeRefund()
     }
     
-    RowLayout{
+    function openRefund(){
+        swipeView.currentIndex = 1
+        swipeView.currentItem.maxAmount = labelView.amountsPayable
+    }
+    
+    function closeRefund(){
+        swipeView.currentIndex = 0
+    }
+    
+    Item{
+        id: element
         anchors.right: parent.right
         anchors.rightMargin: 10
         anchors.bottom: layout.top
@@ -60,14 +60,29 @@ Rectangle {
         
         OrderDetailLabelView{
             id:labelView
-            Layout.fillWidth:true
+            width:detail.width /2 - 15
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            anchors.left: parent.left
+            anchors.leftMargin: 0
             Layout.fillHeight: true
         }
         
         SwipeView{
             id:swipeView
-            Layout.fillWidth:true
+            width: labelView.width
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
             Layout.fillHeight: true
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            currentIndex: 0
+            interactive: false
+            clip: true
             
             OrderDetailListView{
                 id:listView
@@ -94,12 +109,26 @@ Rectangle {
             id:closeBtn
             height: parent.height - 10
             width:110
-            text: "关闭"
+            text: {
+                if(swipeView.currentIndex === 0){
+                    return "关闭"
+                } else {
+                    return "取消"
+                }
+            }
+
             text_color: "#333333"
             pressedColor:"#FFFFFF"
             exitedColor: "#FFFFFF"
             borderWidth:1
-            onClicked: detail.close()
+            onClicked: {
+                if(swipeView.currentIndex === 0){
+                    detail.close()
+                } else {
+                    detail.closeRefund()
+                }
+            }
+
             Layout.alignment:Qt.AlignVCenter | Qt.AlignRight
         }
         
@@ -107,12 +136,20 @@ Rectangle {
             id:refundBtn
             height: closeBtn.height
             width:closeBtn.width
-            text: "退款"
+            text: {
+                if(labelView.payState !== "已退款"){
+                    return "退款"
+                } else {
+                    return "已退款"
+                }
+            }
             text_color: "#FFFFFF"
             pressedColor:"#D1514D"
             exitedColor: "#D1514D"
             borderWidth:0
-            onClicked: detail.refund()
+            visible: swipeView.currentIndex === 0
+            onClicked: detail.openRefund()
+            canClicked: labelView.payState !== "已退款"
             Layout.alignment:Qt.AlignVCenter | Qt.AlignHCenter
         }
         
@@ -120,12 +157,25 @@ Rectangle {
             id:printBtn
             height: closeBtn.height
             width:closeBtn.width
-            text: "打印小票"
+            text:  {
+                if(swipeView.currentIndex === 0){
+                    return "打印小票"
+                } else {
+                    return "确认"
+                }
+            }
             text_color: "#FFFFFF"
             pressedColor:"#169BD5"
             exitedColor: "#169BD5"
             borderWidth:0
-            onClicked: detail.print()
+            onClicked: {
+                if(swipeView.currentIndex === 0){
+                    detail.print()
+                } else {
+                    detail.refund(refundView.getRet())
+                }
+            }
+
             Layout.alignment:Qt.AlignVCenter | Qt.AlignLeft
         }
     }

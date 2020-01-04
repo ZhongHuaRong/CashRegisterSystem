@@ -79,7 +79,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.left: parent.left
             anchors.top: parent.top
-            spacing:5
+            spacing:15
             
             Rectangle{
                 id: element

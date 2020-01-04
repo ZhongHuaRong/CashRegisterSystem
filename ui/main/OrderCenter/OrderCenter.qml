@@ -12,11 +12,6 @@ SwipeView {
     
     signal titleChanged(string title)
     
-    Component.onCompleted: {
-        GlobalVar.$event.return_order_data.connect(search.set_model_data)
-        GlobalVar.$event.return_order_detail.connect(orderCenter.change2Detail)
-    }
-    
     function change2Detail(data){
         details.setDetailLabel(data)
         orderCenter.currentIndex = 1
@@ -27,6 +22,10 @@ SwipeView {
         orderCenter.setCurrentIndex(0)
         titleChanged("订单中心")
         
+    }
+    
+    function setData(data){
+        search.set_model_data(data)
     }
     
     OrderSearch{

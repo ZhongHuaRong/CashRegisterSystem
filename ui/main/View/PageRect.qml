@@ -8,6 +8,7 @@ Rectangle{
     border.width: 1
     
     property string totalNumText: "0"
+    property string totalText: "订单总数"
     property string pageNumText: "0"
     property string curPageText: "1"
     
@@ -25,7 +26,7 @@ Rectangle{
         spacing: 7
         
         CText{
-            text:"订单总数:"
+            text:totalText
             anchors.verticalCenter: parent.verticalCenter
         }
         

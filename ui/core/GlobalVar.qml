@@ -9,4 +9,5 @@ QtObject {
     property var $settings: GlobalSettings{} 
     property var $locale: Qt.locale()
     property var $event : GlobalEvent{}
+    property var $accountID: "1001"
 }
