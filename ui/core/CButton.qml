@@ -22,6 +22,7 @@ Rectangle {
     property color text_color: "#000000"
     property int font_pixel: GlobalVar.$settings.font_pixel
     property string font_family: GlobalVar.$settings.font_family
+    property bool font_bold: false
 
     //让子组件button暴露在接口
     property var buttonObject: button
@@ -29,16 +30,11 @@ Rectangle {
     //checkButton property
     property bool checkable: false
     property bool checked: false
-    property var group: 0
 
     signal clicked(var sender);
     signal pressed(var mouse);
     signal move(var mouse);
     signal released(var mouse);
-
-    onGroupChanged: {
-        rect.group.addedChild(rect);
-    }
 
     function reset(){
         if(!rect.checkable)
@@ -251,6 +247,7 @@ Rectangle {
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: rect.font_pixel
             font.family: font_family
+            font.bold:font_bold
             visible: buttonTypeIsText
             color:text_color
         }

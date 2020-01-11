@@ -9,8 +9,8 @@ Rectangle{
     property real columnWidth: (rectangle.width - 180)/ 8.0
     
     signal gotoPage(var page)
-    signal recharge(var id)
-    signal check(var id)
+    signal recharge(var data)
+    signal check(var data)
     
     function setData(orderTotal,pageTotal,cur_page,list){
         bottomRect.totalNumText = orderTotal
@@ -39,7 +39,7 @@ Rectangle{
     }
     
     function memberRecharge(row){
-        recharge(view.model.get(row)["num"])
+        recharge(view.model.get(row))
     }
     
     CTableView {

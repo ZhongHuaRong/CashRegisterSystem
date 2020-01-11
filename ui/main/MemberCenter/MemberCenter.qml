@@ -12,10 +12,14 @@ SwipeView {
     
     signal titleChanged(string title)
     
-    function change2Detail(data){
-        details.setDetailLabel(data)
+    function return2Detail(){
         memberCenter.currentIndex = 1
         titleChanged("会员详情")
+    }
+    
+    function change2Detail(isRecharge,data){
+        details.setDetailLabel(isRecharge,data)
+        return2Detail()
     }
     
     function change2Search(){
@@ -23,9 +27,13 @@ SwipeView {
         titleChanged("会员中心")
     }
     
-    function change2Recording(title){
+    function change2Recording(isRecharge,data){
         memberCenter.setCurrentIndex(2)
-        titleChanged(title)
+        if(isRecharge)
+            memberCenter.titleChanged("充值记录")
+        else
+            memberCenter.titleChanged("购买记录")
+        recordingView.setData(isRecharge,data)
     }
     
     function setData(data){
@@ -34,7 +42,7 @@ SwipeView {
             centerListView.set_model_data(data)
             break
         case 1:
-            centerListView.set_model_data(data)
+            details.setDetailLabel(details.get_current_index()===1,data[1])
             break
         }
     }
@@ -49,15 +57,35 @@ SwipeView {
             GlobalVar.$event.search_member_from_id(id)
         }
         onChange2Check:{
-            change2Detail(data)
+            change2Detail(isRecharge,data)
         }
     }
     
     MemberDetails{
-        id:detail
+        id:details
+        
+        onChange2Recording: {
+            GlobalVar.$event.search_member_recording_from_id(isRecharge,id,20,1)
+        }
+        
+        onSearchFromID: {
+            GlobalVar.$event.search_member_from_id(id)
+        }
+        
+        onClose: {
+            change2Search()
+        }
     }
     
     MemberRecordingTableView{
         id:recordingView
+        
+        onGotoPage: {
+            GlobalVar.$event.search_member_recording_from_id(recordingView.isRecharge,recordingView.id,20,page)
+        }
+        
+        onClose: {
+            return2Detail()
+        }
     }
 }

@@ -8,7 +8,7 @@ Item {
     
     signal searchFromDate(var flag,int count,int pageNum)
     signal searchFromID(var id)
-    signal change2Check(var data)
+    signal change2Check(var isRecharge,var data)
     
     property var columnWidth: (rectangle.width - 180)/ 9.0
     
@@ -16,11 +16,12 @@ Item {
         tableView.setData(list[0]["totalOrder"],list[0]["totalPage"],list[0]["currentPage"],list)
     }
     
-    function recharge(id){
+    function recharge(data){
+        change2Check(true,data)
     }
     
     function check(data){
-        change2Check(data)
+        change2Check(false,data)
     }
     
     Rectangle{
@@ -66,11 +67,11 @@ Item {
                 id:searchbtn
                 text: "搜索"
                 text_color: "#FFFFFF"
-                anchors.verticalCenter: parent.verticalCenter
                 pressedColor:"#169BD5"
                 exitedColor: "#169BD5"
                 unClickedColor: "#169BD5"
                 enteredColor: "#169BD5"
+                anchors.verticalCenter: parent.verticalCenter
                 borderWidth:0
                 height: states.height
                 width: 70
@@ -114,7 +115,7 @@ Item {
             element.searchFromDate(datebtn.firstDate,datebtn.secondDate,
                                    states.currentText,
                                    30,page)
-        onRecharge: element.recharge(id)
+        onRecharge: element.recharge(data)
         onCheck: element.check(data)
     }
 }

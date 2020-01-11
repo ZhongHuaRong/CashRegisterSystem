@@ -4,6 +4,7 @@ import "../core"
 import "./CheckoutCounter"
 import "./OrderCenter"
 import "./MemberCenter"
+import "./Shift"
 
 Rectangle {
     id:rect
@@ -14,6 +15,7 @@ Rectangle {
     property var checkoutCom: Qt.createComponent("qrc:/ui/main/CheckoutCounter/CheckoutCounter.qml")
     property var orderCom: Qt.createComponent("qrc:/ui/main/OrderCenter/OrderCenter.qml")
     property var memberCom: Qt.createComponent("qrc:/ui/main/MemberCenter/MemberCenter.qml")
+    property var shiftCom: Qt.createComponent("qrc:/ui/main/Shift/ShiftView.qml")
     signal connect_electronic_scale()
     signal itemChanged(int index)
     
@@ -50,8 +52,11 @@ Rectangle {
             var page = memberCom.createObject(swipeView)
             page.titleChanged.connect(rect.set_current_tab_text)
             GlobalVar.$event.return_member_data.connect(page.setData)
+            GlobalVar.$event.return_member_recording.connect(page.change2Recording)
             break
         case "交接班":
+            console.debug(memberCom.errorString())
+            var page = shiftCom.createObject(swipeView)
         case "设置":
         default:
             checkoutCom.createObject(swipeView,{
@@ -108,6 +113,7 @@ Rectangle {
             break;
         case 2:
             GlobalVar.$event.return_member_data.disconnect(item.setData)
+            GlobalVar.$event.return_member_recording.disconnect(item.change2Recording)
             break;
         case 3:
             break;

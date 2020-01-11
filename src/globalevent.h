@@ -28,16 +28,19 @@ signals:
     
     void search_member_from_level(const QString& flag,const int& count,const int& page);
     void search_member_from_id(const QString& id);
+    void search_member_recording_from_id(bool isRecharge,const QString& id,const int& count,const int& page);
     
     void return_order_data(const QList<QVariant>& data);
     void return_order_detail(const QVariant& data);
     
     void return_member_data(const QList<QVariant>& data);
+    void return_member_recording(bool isRecharge,const QList<QVariant> &data);
 public slots:
     void receive_order_data(const QList<QVariant>& data);
     void receive_order_detail(const QVariant& data);
     
     void receive_member_data(const QList<QVariant>& data);
+    void receive_member_recording(bool isRecharge,const QList<QVariant> &data);
 private:
     NetworkModule network;
 };

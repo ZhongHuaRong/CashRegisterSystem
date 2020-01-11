@@ -126,6 +126,8 @@ void NetworkModule::search_member_from_id(const QString &id)
     item["expireDate"] = "长期";
     item["level"] = "VIP会员";
     item["state"] = "开启";
+    item["name"] = "ZM";
+    item["remark"] = "一个人";
     
     QMap<QString,QVariant> msg;
     msg["currentPage"] = 1;
@@ -169,4 +171,44 @@ void NetworkModule::search_member_from_level(const QString &flag, const int &cou
     }
     
     emit return_member_data(data);
+}
+
+void NetworkModule::search_member_recording_from_id(bool isRecharge,const QString &id,
+                                                    const int &count, const int &page)
+{
+    qDebug() << isRecharge;
+    qDebug() << id;
+    qDebug() << count;
+    qDebug() << page;
+    
+    QList<QVariant> data;
+    QMap<QString,QVariant> item;
+    
+    if(isRecharge){
+        item["num"] = "696386201575696789413";
+        item["account"] = "15626205918";
+        item["rechargeAmount"] = "111.00";
+        item["rechargeTime"] = "2019-11-145";
+        item["state"] = "已付款";
+    } else { 
+        item["num"] = "696386201575696789413";
+        item["count"] = "2";
+        item["total"] = "1.00";
+        item["actualAmount"] = "1.00";
+        item["payTime"] = "2019-11-13";
+        item["state"] = "已付款";
+    }
+    
+    QMap<QString,QVariant> msg;
+    msg["id"] = id;
+    msg["currentPage"] = page;
+    msg["totalPage"] = 20;
+    msg["totalOrder"] = 20 * count;
+    data.push_back(msg);
+    for(auto i = 0;i < count;i++){
+        item["rechargeAmount"] = QString::number(i);
+        item["count"] = QString::number(i);
+        data.push_back(item);
+    }
+    emit return_member_recording(isRecharge,data);
 }

@@ -36,14 +36,6 @@ Window {
 //        return (dpW(numbers)+dpH(numbers))/2;
     }
     
-    MouseArea {
-        id: mouseArea
-        anchors.fill: parent
-        onDoubleClicked: {
-            Qt.quit()
-        }
-    }
-    
     MainWindow {
         id:main_rect
         anchors.fill: parent

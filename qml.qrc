@@ -43,5 +43,11 @@
         <file>ui/main/MemberCenter/MemberDetails.qml</file>
         <file>ui/main/MemberCenter/MemberRecordingTableView.qml</file>
         <file>ui/main/MemberCenter/MemberSearch.qml</file>
+        <file>ui/main/MemberCenter/MemberDetailLabelView.qml</file>
+        <file>ui/main/MemberCenter/MemberRechargeView.qml</file>
+        <file>ui/core/UnderlineButton.qml</file>
+        <file>ui/main/MemberCenter/MemberDetailInput.qml</file>
+        <file>ui/core/BorderButton.qml</file>
+        <file>ui/main/Shift/ShiftView.qml</file>
     </qresource>
 </RCC>
