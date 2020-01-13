@@ -63,9 +63,9 @@ Item  {
         }
         
         Rectangle{
-            border.width: 1
-            border.color: "#CCCCCC"
-            height: 2
+            border.width: 0
+            color: "#CCCCCC"
+            height: 1
             anchors.right: parent.right
             anchors.rightMargin: 0
             anchors.left: parent.left
@@ -120,9 +120,9 @@ Item  {
         }
         
         Rectangle{
-            border.width: 1
-            border.color: "#CCCCCC"
-            height: 2
+            border.width: 0
+            color: "#CCCCCC"
+            height: 1
             anchors.right: parent.right
             anchors.rightMargin: 0
             anchors.left: parent.left
@@ -218,9 +218,9 @@ Item  {
         }
         
         Rectangle{
-            border.width: 1
-            border.color: "#CCCCCC"
-            height: 2
+            border.width: 0
+            color: "#CCCCCC"
+            height: 1
             anchors.right: parent.right
             anchors.rightMargin: 0
             anchors.left: parent.left
@@ -256,9 +256,9 @@ Item  {
         }
         
         Rectangle{
-            border.width: 1
-            border.color: "#CCCCCC"
-            height: 2
+            border.width: 0
+            color: "#CCCCCC"
+            height: 1
             anchors.right: parent.right
             anchors.rightMargin: 0
             anchors.left: parent.left
@@ -304,9 +304,9 @@ Item  {
             }
         }
         Rectangle{
-            border.width: 1
-            border.color: "#CCCCCC"
-            height: 2
+            border.width: 0
+            color: "#CCCCCC"
+            height: 1
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 0
             anchors.left: parent.left
@@ -353,9 +353,9 @@ Item  {
             }
         }
         Rectangle{
-            border.width: 1
-            border.color: "#CCCCCC"
-            height: 2
+            border.width: 0
+            color: "#CCCCCC"
+            height: 1
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 0
             anchors.right: parent.right
@@ -401,9 +401,9 @@ Item  {
             }
         }
         Rectangle{
-            border.width: 1
-            border.color: "#CCCCCC"
-            height: 2
+            border.width: 0
+            color: "#CCCCCC"
+            height: 1
             anchors.right: parent.right
             anchors.rightMargin: 0
             anchors.left: parent.left

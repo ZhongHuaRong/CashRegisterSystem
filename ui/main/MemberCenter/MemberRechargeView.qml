@@ -193,7 +193,7 @@ Item {
         anchors.left: parent.left
         anchors.leftMargin: 0
         anchors.top: actually.bottom
-        anchors.topMargin: 0
+        anchors.topMargin: -1
         color: "#00000000"
         border.color: "#CCCCCC"
         border.width: 1

@@ -64,9 +64,9 @@ TableView {
         height:40
         border.width: 0
         Rectangle{
-            height:2
-            border.width: 1
-            border.color: "#CCCCCC"
+            height:1
+            border.width: 0
+            color: "#CCCCCC"
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom

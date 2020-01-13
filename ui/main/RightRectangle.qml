@@ -57,6 +57,7 @@ Rectangle {
         case "交接班":
             console.debug(memberCom.errorString())
             var page = shiftCom.createObject(swipeView)
+            break
         case "设置":
         default:
             checkoutCom.createObject(swipeView,{
