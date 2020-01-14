@@ -49,5 +49,6 @@
         <file>ui/main/MemberCenter/MemberDetailInput.qml</file>
         <file>ui/core/BorderButton.qml</file>
         <file>ui/main/Shift/ShiftView.qml</file>
+        <file>ui/main/SettingView/SettingView.qml</file>
     </qresource>
 </RCC>

@@ -5,6 +5,7 @@ import "./CheckoutCounter"
 import "./OrderCenter"
 import "./MemberCenter"
 import "./Shift"
+import "./SettingView"
 
 Rectangle {
     id:rect
@@ -16,6 +17,7 @@ Rectangle {
     property var orderCom: Qt.createComponent("qrc:/ui/main/OrderCenter/OrderCenter.qml")
     property var memberCom: Qt.createComponent("qrc:/ui/main/MemberCenter/MemberCenter.qml")
     property var shiftCom: Qt.createComponent("qrc:/ui/main/Shift/ShiftView.qml")
+    property var setCom: Qt.createComponent("qrc:/ui/main/SettingView/SettingView.qml")
     signal connect_electronic_scale()
     signal itemChanged(int index)
     
@@ -59,6 +61,9 @@ Rectangle {
             var page = shiftCom.createObject(swipeView)
             break
         case "设置":
+            console.debug(setCom.errorString())
+            var page = setCom.createObject(swipeView)
+            break
         default:
             checkoutCom.createObject(swipeView,{
                                          text:name

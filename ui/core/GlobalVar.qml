@@ -10,4 +10,5 @@ QtObject {
     property var $locale: Qt.locale()
     property var $event : GlobalEvent{}
     property var $accountID: "1001"
+    property var $electronicScaleState: "未连接"
 }
