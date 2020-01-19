@@ -74,7 +74,7 @@ Item {
             
             
             ColumnLayout{
-                spacing: 10
+                spacing: 15
                 
                 CText{
                     id:electronicScaleTitle
@@ -232,6 +232,39 @@ Item {
                     id:adText
                     text: "广告词设置"
                     font.bold: true
+                }
+
+                TitleInput{
+                    id:billing_ad_input
+                    title: "结算时广告词"
+                    height: 40
+                    width: 500
+                    text:GlobalVar.$settings.billing_ad
+                    onEditingFinished: {
+                        GlobalVar.$settings.billing_ad = text
+                    }
+                }
+
+                TitleInput{
+                    id:billing_finsh_ad_input
+                    title:"结算完成广告词"
+                    height: 40
+                    width: 500
+                    text:GlobalVar.$settings.billing_finsh_ad
+                    onEditingFinished: {
+                        GlobalVar.$settings.billing_finsh_ad = text
+                    }
+                }
+
+                TitleInput{
+                    id:greeting_input
+                    title:"问候广告词"
+                    height: 40
+                    width: 500
+                    text:GlobalVar.$settings.greeting
+                    onEditingFinished: {
+                        GlobalVar.$settings.greeting = text
+                    }
                 }
                 
                 
@@ -481,7 +514,88 @@ Item {
                     font.bold: true
                 }
                 
-                
+                Item{
+                    id: element7
+                    height:40
+
+                    CText{
+                        id: alipayTitle
+                        text: "支付宝: "
+                        anchors.left: parent.left
+                        anchors.leftMargin: 0
+                        anchors.verticalCenter: parent.verticalCenter
+                        font.bold: true
+                    }
+
+                    Switch{
+                        id:alipaySwitch
+                        width: 129
+                        height: alipayTitle.height
+                        text:{
+                            checked?"打开":"关闭"
+                        }
+                        checked: GlobalVar.$settings.alipay
+                        onCheckedChanged: {
+                            GlobalVar.$settings.alipay = alipaySwitch.checked
+                        }
+                        anchors.topMargin: 5
+                        anchors.left: alipayTitle.right
+                        anchors.leftMargin: 0
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+
+                    CText{
+                        id: wcpayTitle
+                        text: "微信支付: "
+                        anchors.left: alipaySwitch.right
+                        anchors.leftMargin: 100
+                        anchors.verticalCenter: parent.verticalCenter
+                        font.bold: true
+                    }
+
+                    Switch{
+                        id:wcpaySwitch
+                        width: 129
+                        height: alipayTitle.height
+                        text:{
+                            checked?"打开":"关闭"
+                        }
+                        checked: GlobalVar.$settings.wxpay
+                        onCheckedChanged: {
+                            GlobalVar.$settings.wxpay = wcpaySwitch.checked
+                        }
+                        anchors.topMargin: 5
+                        anchors.left: wcpayTitle.right
+                        anchors.leftMargin: 0
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+
+                    CText{
+                        id: memberTitle
+                        text: "会员卡: "
+                        anchors.left: wcpaySwitch.right
+                        anchors.leftMargin: 100
+                        anchors.verticalCenter: parent.verticalCenter
+                        font.bold: true
+                    }
+
+                    Switch{
+                        id:memberSwitch
+                        width: 129
+                        height: alipayTitle.height
+                        text:{
+                            checked?"打开":"关闭"
+                        }
+                        checked: GlobalVar.$settings.membership_card
+                        onCheckedChanged: {
+                            GlobalVar.$settings.membership_card = memberSwitch.checked
+                        }
+                        anchors.topMargin: 5
+                        anchors.left: memberTitle.right
+                        anchors.leftMargin: 0
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                }
             }
         }
     }

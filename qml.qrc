@@ -50,5 +50,6 @@
         <file>ui/core/BorderButton.qml</file>
         <file>ui/main/Shift/ShiftView.qml</file>
         <file>ui/main/SettingView/SettingView.qml</file>
+        <file>ui/main/SettingView/TitleInput.qml</file>
     </qresource>
 </RCC>
