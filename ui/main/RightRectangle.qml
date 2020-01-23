@@ -41,28 +41,31 @@ Rectangle {
     }
     
     function add_view(name){
+        var page
         switch(name){
         case "订单中心":
             console.debug(orderCom.errorString())
-            var page = orderCom.createObject(swipeView)
+            page = orderCom.createObject(swipeView)
             page.titleChanged.connect(rect.set_current_tab_text)
             GlobalVar.$event.return_order_data.connect(page.setData)
             GlobalVar.$event.return_order_detail.connect(page.change2Detail)
             break
         case "会员中心":
             console.debug(memberCom.errorString())
-            var page = memberCom.createObject(swipeView)
+            page = memberCom.createObject(swipeView)
             page.titleChanged.connect(rect.set_current_tab_text)
             GlobalVar.$event.return_member_data.connect(page.setData)
             GlobalVar.$event.return_member_recording.connect(page.change2Recording)
             break
         case "交接班":
             console.debug(memberCom.errorString())
-            var page = shiftCom.createObject(swipeView)
+            page = shiftCom.createObject(swipeView)
             break
         case "设置":
             console.debug(setCom.errorString())
-            var page = setCom.createObject(swipeView)
+            page = setCom.createObject(swipeView)
+            GlobalVar.$event.return_image_path_list.connect(page.addImage)
+            GlobalVar.$event.find_image(GlobalVar.$settings.image_path)
             break
         default:
             checkoutCom.createObject(swipeView,{
@@ -124,6 +127,7 @@ Rectangle {
         case 3:
             break;
         case 4:
+            GlobalVar.$event.return_image_path_list.disconnect(item.addImage)
             break;
         }
 

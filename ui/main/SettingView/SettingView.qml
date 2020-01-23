@@ -5,6 +5,20 @@ import "../../core"
 
 Item {
     id: settingView
+
+    function addImage(list){
+        console.debug(list.length)
+        console.debug(list[0])
+    }
+
+    function gotoItem(item){
+//        scrollView.flickableItem.flick(0,-item.y)
+        if(viewLayout.height < item.y + scrollView.height)
+            scrollView.flickableItem.contentY = viewLayout.height - scrollView.height
+        else
+            scrollView.flickableItem.contentY = item.y
+    }
+
     
     Rectangle{
         id:contentRect
@@ -38,26 +52,29 @@ Item {
                 height:30
                 text: qsTr("称重设置")
                 Layout.fillWidth: true
-                enabled: !checked
                 checked:true
+                onClicked:gotoItem(electronicScaleTitle)
             }
             
             UnderlineButton {
                 height:30
                 text: qsTr("打印机设置")
                 Layout.fillWidth: true
+                onClicked:gotoItem(printerTitle)
             }
             
             UnderlineButton {
                 height:30
                 text: qsTr("广告设置")
                 Layout.fillWidth: true
+                onClicked:gotoItem(adTitle)
             }
             
             UnderlineButton {
                 height:30
                 text: qsTr("界面设置")
                 Layout.fillWidth: true
+                onClicked:gotoItem(viewTitle)
             }
         }
         
@@ -74,7 +91,8 @@ Item {
             
             
             ColumnLayout{
-                spacing: 15
+                id:viewLayout
+                spacing: 25
                 
                 CText{
                     id:electronicScaleTitle
@@ -226,6 +244,10 @@ Item {
                     id:adimgText
                     text: "客显轮播图设置"
                     font.bold: true
+                }
+
+                Flow{
+                    id:imageFlow
                 }
                 
                 CText{

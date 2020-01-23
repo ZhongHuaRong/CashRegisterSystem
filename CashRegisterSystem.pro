@@ -16,7 +16,8 @@ SOURCES += \
         src/main.cpp \
         src/networkmodule.cpp \
         src/globalevent.cpp \
-    src/dottedline.cpp
+    src/dottedline.cpp \
+    src/fileinfo.cpp
 
 RESOURCES += qml.qrc
 
@@ -42,4 +43,5 @@ DISTFILES +=
 HEADERS += \
     src/networkmodule.h \
     src/globalevent.h \
-    src/dottedline.h
+    src/dottedline.h \
+    src/fileinfo.h

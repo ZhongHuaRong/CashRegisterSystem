@@ -6,6 +6,7 @@
 #include <QMap>
 #include <QList>
 #include "networkmodule.h"
+#include "fileinfo.h"
 /**
  * @brief The GlobalEvent class
  * 全局事件处理
@@ -35,14 +36,20 @@ signals:
     
     void return_member_data(const QList<QVariant>& data);
     void return_member_recording(bool isRecharge,const QList<QVariant> &data);
+    
+    void find_image(const QString& path);
+    void return_image_path_list(const QVariantList& pathlist);
 public slots:
     void receive_order_data(const QList<QVariant>& data);
     void receive_order_detail(const QVariant& data);
     
     void receive_member_data(const QList<QVariant>& data);
     void receive_member_recording(bool isRecharge,const QList<QVariant> &data);
+    
+    void receive_image_path_list(const QVariantList& pathlist);
 private:
     NetworkModule network;
+    FileInfo fileinfo;
 };
 
 #endif // GLOBALEVENT_H

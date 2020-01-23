@@ -44,4 +44,5 @@ Settings {
     property bool membership_card: true
     property string font_family: "微软雅黑"
     property int font_pixel: 12
+    property string image_path: "./image"
 }
