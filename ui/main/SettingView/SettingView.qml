@@ -16,7 +16,23 @@ Item {
         if(viewLayout.height < item.y + scrollView.height)
             scrollView.flickableItem.contentY = viewLayout.height - scrollView.height
         else
-            scrollView.flickableItem.contentY = item.y
+            scrollView.flickableItem.contentY = item.y + 1
+    }
+    
+    function yChanged(){
+        var y = scrollView.flickableItem.contentY
+        if(y > viewTitle.y)
+            buttonGroup.checkedButton = uiBtn
+        else if(y > adTitle.y)
+            buttonGroup.checkedButton = adBtn
+        else if(y > printerTitle.y)
+            buttonGroup.checkedButton = printerBtn
+        else
+            buttonGroup.checkedButton = firstBtn
+    }
+    
+    Component.onCompleted: {
+        scrollView.flickableItem.contentYChanged.connect(settingView.yChanged)
     }
 
     
@@ -34,6 +50,7 @@ Item {
         border.width: 0
         
         ButtonGroup{
+            id:buttonGroup
             buttons: element.children
         }
         
@@ -49,6 +66,7 @@ Item {
             spacing:0
             
             UnderlineButton {
+                id:firstBtn
                 height:30
                 text: qsTr("称重设置")
                 Layout.fillWidth: true
@@ -57,6 +75,7 @@ Item {
             }
             
             UnderlineButton {
+                id:printerBtn
                 height:30
                 text: qsTr("打印机设置")
                 Layout.fillWidth: true
@@ -64,6 +83,7 @@ Item {
             }
             
             UnderlineButton {
+                id:adBtn
                 height:30
                 text: qsTr("广告设置")
                 Layout.fillWidth: true
@@ -71,6 +91,7 @@ Item {
             }
             
             UnderlineButton {
+                id:uiBtn
                 height:30
                 text: qsTr("界面设置")
                 Layout.fillWidth: true
