@@ -18,24 +18,6 @@ Window {
     flags:Qt.Window | Qt.FramelessWindowHint
     screen:Qt.application.screens[0]
     
-//    property real multiplierH: window.height/480
-//    property real multiplierW: window.width/640
-    
-    function dpH(numbers) {
-        return numbers
-//        return numbers*window.multiplierH;
-    }
-
-    function dpW(numbers) {
-        return numbers
-//        return numbers*window.multiplierW;
-    }
-
-    function dpX(numbers){
-        return numbers
-//        return (dpW(numbers)+dpH(numbers))/2;
-    }
-    
     function addImage(list){
         GlobalVar.$adImageList = list
     }
@@ -43,6 +25,17 @@ Window {
     Component.onCompleted: {
         GlobalVar.$event.return_image_path_list.connect(main_window.addImage)
         GlobalVar.$event.find_image(GlobalVar.$settings.image_path)
+    }
+    
+    Timer{
+        interval: 500 
+        running: true
+        repeat: true
+        onTriggered: {
+            GlobalVar.$curImageIndex += 1
+            GlobalVar.$curImageIndex %= GlobalVar.$adImageList.length
+            guest_window.adChanged(GlobalVar.$curImageIndex)
+        }
     }
     
     MainWindow {
@@ -54,7 +47,5 @@ Window {
     GuestWindow {
         id:guest_window
     }
-    
-
     
 }

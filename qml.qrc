@@ -52,5 +52,6 @@
         <file>ui/main/SettingView/SettingView.qml</file>
         <file>ui/main/SettingView/TitleInput.qml</file>
         <file>ui/main/SettingView/ImageItem.qml</file>
+        <file>ui/secondary/ADRect.qml</file>
     </qresource>
 </RCC>

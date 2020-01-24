@@ -9,7 +9,8 @@ QtObject {
     property var $settings: GlobalSettings{} 
     property var $locale: Qt.locale()
     property var $event : GlobalEvent{}
-    property var $accountID: "1001"
-    property var $electronicScaleState: "未连接"
+    property string $accountID: "1001"
+    property string $electronicScaleState: "未连接"
     property var $adImageList: []
+    property real $curImageIndex: 0
 }
