@@ -36,6 +36,15 @@ Window {
 //        return (dpW(numbers)+dpH(numbers))/2;
     }
     
+    function addImage(list){
+        GlobalVar.$adImageList = list
+    }
+    
+    Component.onCompleted: {
+        GlobalVar.$event.return_image_path_list.connect(main_window.addImage)
+        GlobalVar.$event.find_image(GlobalVar.$settings.image_path)
+    }
+    
     MainWindow {
         id:main_rect
         anchors.fill: parent

@@ -1,4 +1,8 @@
 #include "fileinfo.h"
+#include <QFileInfo>
+#include <QFileInfoList>
+#include <QDir>
+#include <QDebug>
 
 FileInfo::FileInfo(QObject *parent) : QObject(parent)
 {
@@ -17,7 +21,14 @@ FileInfo::~FileInfo()
 void FileInfo::find_image(const QString &path)
 {
     QVariantList list;
-    list.push_back(path);
     
+    QDir dir(path);
+    QStringList filters;
+    filters << "*.jpg" << "*.png" << "*.gif";
+    dir.setNameFilters(filters);
+    
+    for(auto i : dir.entryList()){
+        list.push_back(dir.absolutePath() + "/" + i);
+    }
     emit return_image_path_list(list);
 }

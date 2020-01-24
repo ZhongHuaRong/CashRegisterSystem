@@ -9,6 +9,7 @@
 
 #include "globalevent.h"
 #include "dottedline.h"
+#include "imageitem.h"
 
 #ifdef RELEASE 
 #include <QDateTime>
@@ -65,6 +66,7 @@ int main(int argc, char *argv[])
     qRegisterMetaType<QVector<QMap<QString,QString>>>("QVector<QMap<QString,QString>>");
     qmlRegisterType<GlobalEvent>("an.qt.GlobalEvent", 1, 0, "GlobalEvent");
     qmlRegisterType<DottedLine>("an.qt.DottedLine", 1, 0, "DottedLine");
+    qmlRegisterType<ImageItem>("an.qt.ImageItem", 1, 0, "ImageItem");
     
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml")));

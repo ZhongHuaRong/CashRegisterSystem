@@ -64,8 +64,6 @@ Rectangle {
         case "设置":
             console.debug(setCom.errorString())
             page = setCom.createObject(swipeView)
-            GlobalVar.$event.return_image_path_list.connect(page.addImage)
-            GlobalVar.$event.find_image(GlobalVar.$settings.image_path)
             break
         default:
             checkoutCom.createObject(swipeView,{
@@ -127,7 +125,6 @@ Rectangle {
         case 3:
             break;
         case 4:
-            GlobalVar.$event.return_image_path_list.disconnect(item.addImage)
             break;
         }
 

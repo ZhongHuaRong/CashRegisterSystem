@@ -17,12 +17,13 @@ SOURCES += \
         src/networkmodule.cpp \
         src/globalevent.cpp \
     src/dottedline.cpp \
-    src/fileinfo.cpp
+    src/fileinfo.cpp \
+    src/imageitem.cpp
 
 RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
+QML_IMPORT_PATH = ui
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
@@ -44,4 +45,5 @@ HEADERS += \
     src/networkmodule.h \
     src/globalevent.h \
     src/dottedline.h \
-    src/fileinfo.h
+    src/fileinfo.h \
+    src/imageitem.h

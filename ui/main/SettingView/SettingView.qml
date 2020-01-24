@@ -5,11 +5,9 @@ import "../../core"
 
 Item {
     id: settingView
-
-    function addImage(list){
-        console.debug(list.length)
-        console.debug(list[0])
-    }
+    property var imgCom: Qt.createComponent("qrc:/ui/main/SettingView/ImageItem.qml")
+    
+    signal imageClear()
 
     function gotoItem(item){
 //        scrollView.flickableItem.flick(0,-item.y)
@@ -33,6 +31,15 @@ Item {
     
     Component.onCompleted: {
         scrollView.flickableItem.contentYChanged.connect(settingView.yChanged)
+        
+        settingView.imageClear()
+        var item
+        for(var i in GlobalVar.$adImageList){
+            item = imgCom.createObject(imageFlow,{
+                                           "source":GlobalVar.$adImageList[i]
+                                       })
+            settingView.imageClear.connect(item.destroy)
+        }
     }
 
     
@@ -269,6 +276,8 @@ Item {
 
                 Flow{
                     id:imageFlow
+                    spacing: 10
+                    width:contentRect.width
                 }
                 
                 CText{
