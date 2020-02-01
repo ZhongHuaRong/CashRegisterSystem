@@ -1,10 +1,12 @@
 import QtQuick 2.12
+import QtQuick.Controls 2.5
 import QtQuick.Window 2.12
+import "../core"
 
 Window {
     id:guest_window
-    width:640
-    height:480
+    width:1280
+    height:960
     visible: true
 //    visible:Qt.application.screens.length > 1
 //    visibility: Qt.application.screens.length > 1?Window.Maximized:Window.Hidden
@@ -18,10 +20,24 @@ Window {
     onClosing: Qt.quit()
     
     function adChanged(index){
-        console.debug(index)
+        console.debug(GlobalVar.$adImageList[index])
+        adpage.midPath = GlobalVar.$adImageList[index]
     }
     
-    ADRect{
+    
+    SwipeView {
+        id: swipeView
         anchors.fill: parent
+//        interactive:false
+//        clip: true
+//        currentIndex: 1
+        
+        ADRect{
+            id:adpage
+        }
+        
+        DetailsPage{
+            id:detailspage
+        }
     }
 }

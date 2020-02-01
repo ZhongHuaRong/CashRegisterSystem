@@ -5,7 +5,7 @@ import "../../core"
 
 Item {
     id: settingView
-    property var imgCom: Qt.createComponent("qrc:/ui/main/SettingView/ImageItem.qml")
+    property var imgCom: Qt.createComponent("qrc:/ui/core/ImageItem.qml")
     
     signal imageClear()
 
