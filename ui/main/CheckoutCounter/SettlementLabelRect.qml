@@ -79,7 +79,7 @@ Rectangle {
                 id:payableText
                 color: "#FFFFFF"
                 font.bold: true
-                font.pixelSize: payableTitleText.font.pixelSize + 3
+                font.pixelSize: payableTitleText.font.pixelSize + 5
             }
         }
     }

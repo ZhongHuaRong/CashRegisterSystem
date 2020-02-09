@@ -27,10 +27,6 @@ Item {
         busy_dialog.open()
     }
     
-    Component.onCompleted: {
-        account.setText(GlobalVar.$settings.account)
-    }
-    
     Image {
         id: logo_img
         x: 170
@@ -52,6 +48,7 @@ Item {
         anchors.topMargin: pw.anchors.topMargin * 2
         anchors.horizontalCenter: parent.horizontalCenter
         preset_text: "门店收银员账号"
+        text: GlobalVar.$settings.account
     }
     
     CTextEdit{

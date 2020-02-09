@@ -1,12 +1,33 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import "../../core"
+import "../Dialog"
 
 Rectangle {
     id: page
     color:"#00000000"
     
     signal commodityEdit()
+    
+    property var dialogList: ["qrc:/ui/main/Dialog/MemberSearchDialog.qml"]
+    
+    function openDialog(index){
+        dialogLoader.source = dialogList[index]
+        dialogLoader.item.show()
+        dialogLoader.item.closing.connect(page.dialogClosing)
+        switch(index){
+        case 0:
+            dialogLoader.item.searchMember.connect()
+            dialogLoader.item.insertMember.connect()
+        }
+    }
+    
+    function dialogClosing(){
+    }
+    
+    function getData(data){
+        console.debug(data)
+    }
     
     CommodityListView{
         id:listView
@@ -48,6 +69,7 @@ Rectangle {
         exitedColor: "#FFFFFF"
         borderWidth:1
         text: "会员查询"
+        onClicked: openDialog(0)
     }
     
     SettlementLabelRect{
@@ -58,10 +80,10 @@ Rectangle {
         anchors.leftMargin: 10
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 10
-        count: "共" + GlobalVar.$commodityList.length.toString() + "条"
-        totalGold: GlobalVar.$totalGold.toString()
-        discount: GlobalVar.$discount.toString()
-        payable: (GlobalVar.$totalGold - GlobalVar.$discount).toString()
+        count: "共" + GlobalVar.$commodityList.length.toFixed(2) + "条"
+        totalGold: GlobalVar.$totalGold.toFixed(2)
+        discount: GlobalVar.$discount.toFixed(2)
+        payable: (GlobalVar.$totalGold - GlobalVar.$discount).toFixed(2)
     }
     
     Item{
@@ -106,5 +128,45 @@ Rectangle {
             font_bold:true
             onClicked: page.commodityEdit()
         }
+    }
+    
+    Flow{
+        id:mainFlow
+        anchors.bottom: weightRect.top
+        anchors.bottomMargin: 10
+        anchors.right: parent.right
+        anchors.rightMargin: 10
+        anchors.left: listView.right
+        anchors.leftMargin: 10
+        anchors.top: searchItem.bottom
+        anchors.topMargin: 10
+    }
+    
+    Rectangle{
+        id:weightRect
+        border.width: 1
+        border.color: "#CCCCCC"
+        color: "#00000000"
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10
+        anchors.right: parent.right
+        anchors.rightMargin: 10
+        anchors.left: settlementLabelRect.right
+        anchors.leftMargin: 10
+        height:settlementLabelRect.height
+        
+        CText{
+            id:weightText
+            font.pixelSize: GlobalVar.$settings.font_pixel + 8
+            font.bold: true
+            color: "#000000"
+            text: "净重: " + GlobalVar.$netWeight.toFixed(2) + " kg"
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+        }
+    }
+    
+    Loader{
+        id:dialogLoader
     }
 }

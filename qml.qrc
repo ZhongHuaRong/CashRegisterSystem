@@ -57,5 +57,7 @@
         <file>ui/main/CheckoutCounter/CommodityListView.qml</file>
         <file>ui/main/CheckoutCounter/ListViewButton.qml</file>
         <file>ui/main/CheckoutCounter/SettlementLabelRect.qml</file>
+        <file>ui/main/Dialog/MemberSearchDialog.qml</file>
+        <file>ui/main/Dialog/PromptDialog.qml</file>
     </qresource>
 </RCC>

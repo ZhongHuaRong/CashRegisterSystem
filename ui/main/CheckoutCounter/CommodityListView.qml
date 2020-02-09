@@ -109,4 +109,5 @@ Rectangle {
         anchors.bottomMargin: 0
         onClicked: listView.clear()
     }
+    
 }

@@ -10,21 +10,21 @@ Rectangle{
     border.width: 1
     
     signal accepted()
-    property string text: input.text
+    property alias text: input.text
     property string preset_text: ""
     property color preset_text_color: "#999999"
     property int echoMode: TextInput.Normal
     property string font_family: GlobalVar.$settings.font_family
     property int  font_pixel: GlobalVar.$settings.font_pixel
-    
-    function setText(text){
-        input.text = text
-    }
+    property int horizontalAlignment: Text.AlignHCenter
+    property int verticalAlignment: Text.AlignVCenter
     
     Text {
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: rect.verticalAlignment
+        horizontalAlignment: rect.horizontalAlignment
         anchors.fill:parent
+        anchors.leftMargin: 10
+        anchors.rightMargin: 10
         color: rect.preset_text_color
         text:rect.preset_text
         visible: input.text.length == 0
@@ -38,8 +38,8 @@ Rectangle{
         font.family: font_family
         width: parent.width
         anchors.centerIn: parent
-        horizontalAlignment:TextInput.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
+        verticalAlignment: rect.verticalAlignment
+        horizontalAlignment: rect.horizontalAlignment
         echoMode:rect.echoMode
         leftPadding: 5
         rightPadding: 5
