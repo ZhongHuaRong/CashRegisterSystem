@@ -20,7 +20,7 @@ Window {
     onClosing: Qt.quit()
     
     function adChanged(index){
-        console.debug(GlobalVar.$adImageList[index])
+//        console.debug(GlobalVar.$adImageList[index])
         adpage.midPath = GlobalVar.$adImageList[index]
     }
     

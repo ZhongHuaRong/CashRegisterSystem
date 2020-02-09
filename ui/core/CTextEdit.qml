@@ -38,7 +38,8 @@ Rectangle{
         font.family: font_family
         width: parent.width
         anchors.centerIn: parent
-        horizontalAlignment:TextInput.AlignVCenter
+        horizontalAlignment:TextInput.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
         echoMode:rect.echoMode
         leftPadding: 5
         rightPadding: 5

@@ -5,7 +5,6 @@
 
 ImageItem::ImageItem()
 {
-    
 }
 
 QString ImageItem::getSource() const
@@ -20,11 +19,11 @@ void ImageItem::setSource(const QString &value)
     source = value;
     image.load(source);
     emit sourceChanged();
+    update();
 }
 
 void ImageItem::paint(QPainter *event)
 {
     event->drawImage(QRectF(0,0,this->width(),this->height()),
-                     image,
-                     image.rect());
+                     image);
 }

@@ -13,4 +13,11 @@ QtObject {
     property string $electronicScaleState: "未连接"
     property var $adImageList: []
     property real $curImageIndex: 0
+    property string $shopname: "也有果"
+    property var $commodityList: []
+    property real $netWeight: 0.00
+    property real $totalGold: 0.00
+    property real $discount: 0.00
+//    property real $payable: 0.00
+    property real $actualPayment: 0.00
 }

@@ -54,5 +54,8 @@
         <file>ui/secondary/ADRect.qml</file>
         <file>ui/secondary/DetailsPage.qml</file>
         <file>ui/core/ImageItem.qml</file>
+        <file>ui/main/CheckoutCounter/CommodityListView.qml</file>
+        <file>ui/main/CheckoutCounter/ListViewButton.qml</file>
+        <file>ui/main/CheckoutCounter/SettlementLabelRect.qml</file>
     </qresource>
 </RCC>
