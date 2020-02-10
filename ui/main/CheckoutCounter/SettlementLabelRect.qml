@@ -12,6 +12,8 @@ Rectangle {
     property alias discount: discountText.text
     property alias payable: payableText.text
     
+    signal clicked()
+    
     ColumnLayout{
         id:leftItem
         anchors.left: parent.left
@@ -82,5 +84,10 @@ Rectangle {
                 font.pixelSize: payableTitleText.font.pixelSize + 5
             }
         }
+    }
+    
+    MouseArea{
+        anchors.fill: parent 
+        onClicked: rect.clicked()
     }
 }

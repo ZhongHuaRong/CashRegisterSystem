@@ -15,6 +15,7 @@ Window {
     signal accept()
     
     property alias msg: msgText.text
+    property alias btnEnabled: acceptBtn.canClicked
     
     Rectangle{
         id: rectangle
@@ -66,7 +67,7 @@ Window {
             anchors.rightMargin: 15
             anchors.left: parent.left
             anchors.leftMargin: 15
-            anchors.top: textEdit.bottom
+            anchors.top: msgText.bottom
             anchors.topMargin: 30
             border.width: 0
         }

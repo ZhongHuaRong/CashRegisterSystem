@@ -18,6 +18,10 @@ Rectangle {
     property var memberCom: Qt.createComponent("qrc:/ui/main/MemberCenter/MemberCenter.qml")
     property var shiftCom: Qt.createComponent("qrc:/ui/main/Shift/ShiftView.qml")
     property var setCom: Qt.createComponent("qrc:/ui/main/SettingView/SettingView.qml")
+    //用于标识接受return_member_data信号时跳转到Detail页面（用于收银台跳转到会员详情）
+    property bool change2MemberDetailFlag: false
+    
+    
     signal connect_electronic_scale()
     signal itemChanged(int index)
     
@@ -132,6 +136,23 @@ Rectangle {
     
     function set_current_tab_text(str){
         bar.currentItem.text = str
+    }
+    
+    function checkoutCounter2MemberDetail(id){
+        change2MemberDetailFlag = true
+        GlobalVar.$event.search_member_from_id(id)
+    }
+    
+    function onCheckoutCounter2MemberDetail(data){
+        if(change2MemberDetailFlag == false)
+            return
+        set_current_view(2,"会员中心")
+        swipeView.currentItem.change2Detail(false,data[1])
+        change2MemberDetailFlag = false
+    }
+    
+    Component.onCompleted: {
+        GlobalVar.$event.return_member_data.connect(rect.onCheckoutCounter2MemberDetail)
     }
     
     Rectangle{
@@ -252,6 +273,9 @@ Rectangle {
         
         CheckoutCounter {
             id: firstPage
+            onChange2MemberDetail: {
+                checkoutCounter2MemberDetail(id)
+            }
         }
     }
     

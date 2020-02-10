@@ -18,6 +18,7 @@ Window {
     
     function searchfailed(){
         promptDialog.show()
+        promptDialog.btnEnabled = true
     }
     
     Rectangle{
@@ -109,7 +110,6 @@ Window {
                 Layout.alignment: Qt.AlignVCenter |  Qt.AlignHCenter 
                 onClicked: {
                     memberSearch.searchMember(textEdit.text)
-                    memberSearch.close()
                 }
                 canClicked: textEdit.text.length != 0
             }
@@ -121,9 +121,8 @@ Window {
         title: "操作提示"
         msg:"未查询到会员，是否添加?"
         onAccept: {
-            promptDialog.hide()
             memberSearch.insertMember(textEdit.text)
-            memberSearch.close()
+            btnEnabled = false
         }
     }
 }

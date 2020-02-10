@@ -8,25 +8,55 @@ Rectangle {
     color:"#00000000"
     
     signal commodityEdit()
+    signal change2MemberDetail(var id)
     
-    property var dialogList: ["qrc:/ui/main/Dialog/MemberSearchDialog.qml"]
+    property var dialogList: ["qrc:/ui/main/Dialog/MemberSearchDialog.qml",
+                              "qrc:/ui/main/Dialog/SettlementDialog.qml"]
+    property int curIndex: -1
     
     function openDialog(index){
         dialogLoader.source = dialogList[index]
+        curIndex = index
         dialogLoader.item.show()
         dialogLoader.item.closing.connect(page.dialogClosing)
         switch(index){
         case 0:
-            dialogLoader.item.searchMember.connect()
-            dialogLoader.item.insertMember.connect()
+            dialogLoader.item.searchMember.connect(GlobalVar.$event.search_member_from_id)
+            GlobalVar.$event.return_member_data.connect(page.search_member_result)
+//            dialogLoader.item.insertMember.connect()
+            break;
+        case 1:
         }
     }
     
     function dialogClosing(){
+        switch(curIndex){
+        case 0:
+            dialogLoader.item.searchMember.disconnect(GlobalVar.$event.search_member_from_id)
+            GlobalVar.$event.return_member_data.disconnect(page.search_member_result)
+            break
+        case 1:
+        }
     }
     
     function getData(data){
         console.debug(data)
+    }
+    
+    function search_member_result(data){
+        if(data.length == 0){
+            dialogLoader.item.searchfailed()
+        } else {
+            set_member_msg(data[1])
+        }
+    }
+    
+    function set_member_msg(data){
+        memberCheckButton.name = data["name"]
+        memberCheckButton.balance = data["balance"]
+        memberCheckButton.integral = data["integral"]
+        memberCheckButton.haveMember = true
+        dialogLoader.item.close()
     }
     
     CommodityListView{
@@ -56,7 +86,7 @@ Rectangle {
         }
     }
     
-    CButton{
+    MemberButton{
         id:memberCheckButton
         width:listView.width
         height:40
@@ -64,12 +94,13 @@ Rectangle {
         anchors.leftMargin: 10
         anchors.bottom: settlementLabelRect.top
         anchors.bottomMargin: 10
-        text_color: "#333333"
-        pressedColor:"#FFFFFF"
-        exitedColor: "#FFFFFF"
-        borderWidth:1
-        text: "会员查询"
-        onClicked: openDialog(0)
+        onClicked: {
+            if(memberCheckButton.haveMember){
+                change2MemberDetail(memberCheckButton.name)
+            } else {
+                openDialog(0)
+            }
+        }
     }
     
     SettlementLabelRect{
@@ -84,6 +115,7 @@ Rectangle {
         totalGold: GlobalVar.$totalGold.toFixed(2)
         discount: GlobalVar.$discount.toFixed(2)
         payable: (GlobalVar.$totalGold - GlobalVar.$discount).toFixed(2)
+        onClicked: openDialog(1)
     }
     
     Item{
