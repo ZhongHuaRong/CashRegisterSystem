@@ -6,6 +6,7 @@ Item {
     id: element
     
     property real maxNum: 0
+    property alias retNumText: amountInputText.text
     property real btnWidth: (element.width - 3) / 4
     property real btnHeight: {
         var h = btnWidth / 4
@@ -66,10 +67,6 @@ Item {
     function clear(){
         amountInputText.clear()
         amountInputText.text = "0"
-    }
-    
-    function getRet(){
-        return Number(amountInputText.text)
     }
     
     Rectangle{

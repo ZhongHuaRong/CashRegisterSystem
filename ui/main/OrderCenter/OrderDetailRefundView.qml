@@ -11,7 +11,7 @@ Rectangle {
     property real maxAmount: 0
     
     function getRet(){
-        return calculator.getRet()
+        return Number(calculator.retNumText)
     }
     
     Item{

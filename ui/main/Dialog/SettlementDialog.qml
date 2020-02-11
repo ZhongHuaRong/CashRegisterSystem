@@ -13,14 +13,6 @@ Window {
     height:635
     color: "#00000000"
     
-    property alias total: totalText.text
-    property alias discount: discountText.text
-    property alias payable: payableText.text
-    property alias actualPayment: actualPaymentText.text
-    property alias arrears: arrearsText.text
-    property alias givechange: givechangeText.text
-    
-    
     ButtonGroup{
         id:valueTicketGroup
         buttons: valueTicketItem.children
@@ -34,6 +26,11 @@ Window {
     ButtonGroup{
         id:noteGroup
         buttons: noteItem.children
+    }
+    
+    ButtonGroup{
+        id:payGroup
+        buttons: payItem.children
     }
     
     Rectangle{
@@ -84,7 +81,7 @@ Window {
                         
                         CText{
                             id:totalText
-                            text:"0.00"
+                            text:GlobalVar.$totalGold.toFixed(2)
                             anchors.right: parent.right
                             anchors.rightMargin: 10
                             anchors.verticalCenter: parent.verticalCenter
@@ -111,7 +108,7 @@ Window {
                         
                         CText{
                             id:discountText
-                            text:"0.00"
+                            text:GlobalVar.$discount.toFixed(2)
                             anchors.right: parent.right
                             anchors.rightMargin: 10
                             anchors.verticalCenter: parent.verticalCenter
@@ -177,7 +174,7 @@ Window {
                         }
                         CText{
                             id:payableText
-                            text:"0.00"
+                            text:(Number(totalText.text) - Number(discountText.text)).toFixed(2)
                             anchors.right: parent.right
                             anchors.rightMargin: 10
                             anchors.verticalCenter: parent.verticalCenter
@@ -206,7 +203,7 @@ Window {
                         
                         CText{
                             id:actualPaymentText
-                            text:"0.00"
+                            text:payableText.text
                             anchors.right: parent.right
                             anchors.rightMargin: 10
                             anchors.verticalCenter: parent.verticalCenter
@@ -232,7 +229,13 @@ Window {
                         
                         CText{
                             id:arrearsText
-                            text:"0.00"
+                            text:{
+                                if(Number(actualPaymentText.text) < Number(payableText.text))
+                                    return (Number(payableText.text) - Number(actualPaymentText.text)).toFixed(2)
+                                else
+                                    return "0.00"
+                            }
+
                             anchors.right: parent.right
                             anchors.rightMargin: 10
                             anchors.verticalCenter: parent.verticalCenter
@@ -259,7 +262,12 @@ Window {
                         
                         CText{
                             id:givechangeText
-                            text:"0.00"
+                            text:{
+                                if(Number(actualPaymentText.text) > Number(payableText.text))
+                                    return (Number(actualPaymentText.text) - Number(payableText.text)).toFixed(2)
+                                else
+                                    return "0.00"
+                            }
                             anchors.right: parent.right
                             anchors.rightMargin: 10
                             anchors.verticalCenter: parent.verticalCenter
@@ -503,12 +511,40 @@ Window {
                         fontColor: "#000000"
                     } 
                 }
+                
+                Calculator{
+                    id:calculator
+                    anchors.bottom: commitBtn.top
+                    anchors.bottomMargin: 10
+                    anchors.right: parent.right
+                    anchors.rightMargin: 20
+                    anchors.left: parent.left
+                    anchors.leftMargin: 0
+                    anchors.top: payItem.bottom
+                    anchors.topMargin: 10
+                    maxNum: 9999999999
+                    retNumText: payableText.text
+                    onRetNumTextChanged: {
+                        GlobalVar.$actualPayment = Number(retNumText)
+                        actualPaymentText.text = GlobalVar.$actualPayment
+                    }
+                }
+                
+                CButton{
+                    id:commitBtn
+                    text:"提交订单"
+                    anchors.right: parent.right
+                    anchors.rightMargin: 20
+                    anchors.left: parent.left
+                    anchors.leftMargin: 0
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 20
+                    text_color: "#FFFFFF"
+                    pressedColor:"#5ECDB9"
+                    exitedColor: "#F32B2B"
+                    onClicked:close()
+                }
             }
         }
     }
-    
-//    MouseArea{
-//        anchors.fill: parent 
-//        onDoubleClicked: settlementDialog.close()
-//    }
 }
