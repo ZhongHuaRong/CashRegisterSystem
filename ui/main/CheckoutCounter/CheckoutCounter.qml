@@ -7,12 +7,12 @@ Rectangle {
     id: page
     color:"#00000000"
     
-    signal commodityEdit()
     signal change2MemberDetail(var id)
     
     property var dialogList: ["qrc:/ui/main/Dialog/MemberSearchDialog.qml",
                               "qrc:/ui/main/Dialog/SettlementDialog.qml"]
     property int curIndex: -1
+    property bool editMode: false
     
     function openDialog(index){
         dialogLoader.source = dialogList[index]
@@ -59,63 +59,100 @@ Rectangle {
         dialogLoader.item.close()
     }
     
-    CommodityListView{
-        id:listView
-        width: 400
-        anchors.bottom: memberCheckButton.top
-        anchors.bottomMargin: 10
-        anchors.left: parent.left
-        anchors.leftMargin: 10
+    Item{
+        id:leftItem
         anchors.top: parent.top
         anchors.topMargin: 10
-        
-        onZeroing: {
-            
-        }
-        
-        onPeeled: {
-            
-        }
-        
-        onOrder: {
-            
-        }
-        
-        onClear: {
-            
-        }
-    }
-    
-    MemberButton{
-        id:memberCheckButton
-        width:listView.width
-        height:40
-        anchors.left: parent.left
-        anchors.leftMargin: 10
-        anchors.bottom: settlementLabelRect.top
-        anchors.bottomMargin: 10
-        onClicked: {
-            if(memberCheckButton.haveMember){
-                change2MemberDetail(memberCheckButton.name)
-            } else {
-                openDialog(0)
-            }
-        }
-    }
-    
-    SettlementLabelRect{
-        id:settlementLabelRect
-        width:listView.width
-        height:150
-        anchors.left: parent.left
-        anchors.leftMargin: 10
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 10
-        count: "共" + GlobalVar.$commodityList.length.toFixed(2) + "条"
-        totalGold: GlobalVar.$totalGold.toFixed(2)
-        discount: GlobalVar.$discount.toFixed(2)
-        payable: (GlobalVar.$totalGold - GlobalVar.$discount).toFixed(2)
-        onClicked: openDialog(1)
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        width:400
+        
+        CommodityListView{
+            id:listView
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            anchors.bottom: memberCheckButton.top
+            anchors.bottomMargin: 10
+            anchors.left: parent.left
+            anchors.leftMargin: 0
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            
+            onZeroing: {
+                
+            }
+            
+            onPeeled: {
+                
+            }
+            
+            onOrder: {
+                
+            }
+            
+            onClear: {
+                
+            }
+        }
+        
+        MemberButton{
+            id:memberCheckButton
+            width:listView.width
+            height:40
+            anchors.left: parent.left
+            anchors.leftMargin: 0
+            anchors.bottom: settlementLabelRect.top
+            anchors.bottomMargin: 10
+            onClicked: {
+                if(memberCheckButton.haveMember){
+                    change2MemberDetail(memberCheckButton.name)
+                } else {
+                    openDialog(0)
+                }
+            }
+        }
+        
+        SettlementLabelRect{
+            id:settlementLabelRect
+            width:listView.width
+            height:110
+            anchors.left: parent.left
+            anchors.leftMargin: 0
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            count: "共" + GlobalVar.$commodityList.length.toFixed(2) + "条"
+            totalGold: GlobalVar.$totalGold.toFixed(2)
+            discount: GlobalVar.$discount.toFixed(2)
+            payable: (GlobalVar.$totalGold - GlobalVar.$discount).toFixed(2)
+            onClicked: openDialog(1)
+        }
+        
+        Rectangle{
+            id:maskRect
+            anchors.fill: parent 
+            visible: editMode
+            border.width: 0
+            color: "#000000"
+            opacity: 0.5
+            
+            MouseArea{
+                anchors.fill: parent 
+                onClicked: editMode = !editMode
+            }
+        }
+        
+        CText{
+            anchors.fill: parent 
+            visible: editMode
+            text: "退出编辑模式"
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.bold: true
+            font.pixelSize: GlobalVar.$settings.font_pixel * 2
+            color: "#ffffff"
+        }
     }
     
     Item{
@@ -123,7 +160,7 @@ Rectangle {
         height: 40
         anchors.right: parent.right
         anchors.rightMargin: 10
-        anchors.left: listView.right
+        anchors.left: leftItem.right
         anchors.leftMargin: 10
         anchors.top: parent.top
         anchors.topMargin: 0
@@ -146,7 +183,12 @@ Rectangle {
             id:searchBtn
             width: 100
             radius: 5
-            text: "商品编辑"
+            text: {
+                if(editMode)
+                    return "退出编辑"
+                else
+                    return "商品编辑"
+            }
             anchors.right: parent.right
             anchors.rightMargin: 0
             anchors.top: parent.top
@@ -158,7 +200,9 @@ Rectangle {
             exitedColor: "#169BD5"
             borderWidth:0
             font_bold:true
-            onClicked: page.commodityEdit()
+            onClicked: {
+                editMode = !editMode
+            }
         }
     }
     
@@ -168,7 +212,7 @@ Rectangle {
         anchors.bottomMargin: 10
         anchors.right: parent.right
         anchors.rightMargin: 10
-        anchors.left: listView.right
+        anchors.left: leftItem.right
         anchors.leftMargin: 10
         anchors.top: searchItem.bottom
         anchors.topMargin: 10
@@ -183,7 +227,7 @@ Rectangle {
         anchors.bottomMargin: 10
         anchors.right: parent.right
         anchors.rightMargin: 10
-        anchors.left: settlementLabelRect.right
+        anchors.left: leftItem.right
         anchors.leftMargin: 10
         height:settlementLabelRect.height
         
